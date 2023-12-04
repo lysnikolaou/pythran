@@ -43,7 +43,7 @@ struct is_mem_fun_pointer_impl
 
 #if !defined(BOOST_TT_PREPROCESSING_MODE)
 // pre-processed code, don't edit, try GNU cpp with 
-// cpp -I../../../ -DBOOST_TT_PREPROCESSING_MODE -x c++ -P filename
+// cpp -I_../../../ -DBOOST_TT_PREPROCESSING_MODE -x c++ -P filename
 
 template <class R, class T >
 struct is_mem_fun_pointer_impl<R(T::*)()> { BOOST_STATIC_CONSTANT(bool, value = true); };

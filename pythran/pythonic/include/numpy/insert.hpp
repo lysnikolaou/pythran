@@ -13,32 +13,32 @@ PYTHONIC_NS_BEGIN
 namespace numpy
 {
 
-  template <class T, class pS, class I, class F>
-  typename std::enable_if<types::is_iterable<I>::value &&
+  template <class T, class pS, class I_, class F>
+  typename std::enable_if<types::is_iterable<I_>::value &&
                               types::is_iterable<F>::value,
                           types::ndarray<T, types::pshape<long>>>::type
-  insert(types::ndarray<T, pS> in, I const &indices, F const &data,
+  insert(types::ndarray<T, pS> in, I_ const &indices, F const &data,
          types::none_type axis = builtins::None);
 
-  template <class T, class pS, class I, class F>
-  typename std::enable_if<types::is_iterable<I>::value &&
+  template <class T, class pS, class I_, class F>
+  typename std::enable_if<types::is_iterable<I_>::value &&
                               !types::is_iterable<F>::value,
                           types::ndarray<T, types::pshape<long>>>::type
-  insert(types::ndarray<T, pS> in, I const &indices, F const &data,
+  insert(types::ndarray<T, pS> in, I_ const &indices, F const &data,
          types::none_type axis = builtins::None);
 
-  template <class T, class pS, class I, class F>
-  typename std::enable_if<!types::is_iterable<I>::value &&
+  template <class T, class pS, class I_, class F>
+  typename std::enable_if<!types::is_iterable<I_>::value &&
                               types::is_iterable<F>::value,
                           types::ndarray<T, types::pshape<long>>>::type
-  insert(types::ndarray<T, pS> in, I const &indices, F const &data,
+  insert(types::ndarray<T, pS> in, I_ const &indices, F const &data,
          types::none_type axis = builtins::None);
 
-  template <class T, class pS, class I, class F>
-  typename std::enable_if<!types::is_iterable<I>::value &&
+  template <class T, class pS, class I_, class F>
+  typename std::enable_if<!types::is_iterable<I_>::value &&
                               !types::is_iterable<F>::value,
                           types::ndarray<T, types::pshape<long>>>::type
-  insert(types::ndarray<T, pS> in, I const &indices, F const &data,
+  insert(types::ndarray<T, pS> in, I_ const &indices, F const &data,
          types::none_type axis = builtins::None);
 
   template <class E, class... Args>

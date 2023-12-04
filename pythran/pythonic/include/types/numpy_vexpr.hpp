@@ -49,13 +49,13 @@ namespace types
     numpy_vexpr &operator=(numpy_vexpr const &);
 
     using shape_t = array<long, value>;
-    template <size_t I>
+    template <size_t I_>
     long shape() const
     {
-      if (I == 0)
+      if (I_ == 0)
         return view_.template shape<0>();
       else
-        return data_.template shape<I>();
+        return data_.template shape<I_>();
     }
 
     iterator begin();

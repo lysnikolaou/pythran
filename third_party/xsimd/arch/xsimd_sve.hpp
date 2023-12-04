@@ -714,21 +714,21 @@ namespace xsimd
          ***************/
 
         // swizzle
-        template <class A, class T, class I, I... idx>
-        inline batch<T, A> swizzle(batch<T, A> const& arg, batch_constant<batch<I, A>, idx...>, requires_arch<sve>) noexcept
+        template <class A, class T, class I_, I_... idx>
+        inline batch<T, A> swizzle(batch<T, A> const& arg, batch_constant<batch<I_, A>, idx...>, requires_arch<sve>) noexcept
         {
             static_assert(batch<T, A>::size == sizeof...(idx), "invalid swizzle indices");
-            const batch<I, A> indices { idx... };
+            const batch<I_, A> indices { idx... };
             return svtbl(arg, indices);
         }
 
-        template <class A, class T, class I, I... idx>
+        template <class A, class T, class I_, I_... idx>
         inline batch<std::complex<T>, A> swizzle(batch<std::complex<T>, A> const& self,
-                                                 batch_constant<batch<I, A>, idx...>,
+                                                 batch_constant<batch<I_, A>, idx...>,
                                                  requires_arch<sve>) noexcept
         {
-            const auto real = swizzle(self.real(), batch_constant<batch<I, A>, idx...> {}, sve {});
-            const auto imag = swizzle(self.imag(), batch_constant<batch<I, A>, idx...> {}, sve {});
+            const auto real = swizzle(self.real(), batch_constant<batch<I_, A>, idx...> {}, sve {});
+            const auto imag = swizzle(self.imag(), batch_constant<batch<I_, A>, idx...> {}, sve {});
             return batch<std::complex<T>>(real, imag);
         }
 
@@ -746,12 +746,12 @@ namespace xsimd
                 return batch<T, A> {};
             }
 
-            template <class A, class T, size_t I, size_t... Is>
-            inline batch<T, A> sve_extract_pair(batch<T, A> const& lhs, batch<T, A> const& rhs, std::size_t n, ::xsimd::detail::index_sequence<I, Is...>) noexcept
+            template <class A, class T, size_t I_, size_t... Is>
+            inline batch<T, A> sve_extract_pair(batch<T, A> const& lhs, batch<T, A> const& rhs, std::size_t n, ::xsimd::detail::index_sequence<I_, Is...>) noexcept
             {
-                if (n == I)
+                if (n == I_)
                 {
-                    return svext(rhs, lhs, I);
+                    return svext(rhs, lhs, I_);
                 }
                 else
                 {
@@ -918,12 +918,12 @@ namespace xsimd
             inline V sve_iota() noexcept { return sve_iota_impl(index<sizeof(T)> {}); }
         } // namespace detail
 
-        template <class A, class T, size_t I, detail::sve_enable_all_t<T> = 0>
-        inline batch<T, A> insert(batch<T, A> const& arg, T val, index<I>, requires_arch<sve>) noexcept
+        template <class A, class T, size_t I_, detail::sve_enable_all_t<T> = 0>
+        inline batch<T, A> insert(batch<T, A> const& arg, T val, index<I_>, requires_arch<sve>) noexcept
         {
-            // create a predicate with only the I-th lane activated
+            // create a predicate with only the I_-th lane activated
             const auto iota = detail::sve_iota<T>();
-            const auto index_predicate = svcmpeq(detail::sve_ptrue<T>(), iota, static_cast<as_unsigned_integer_t<T>>(I));
+            const auto index_predicate = svcmpeq(detail::sve_ptrue<T>(), iota, static_cast<as_unsigned_integer_t<T>>(I_));
             return svsel(index_predicate, broadcast<A, T>(val, sve {}), arg);
         }
 

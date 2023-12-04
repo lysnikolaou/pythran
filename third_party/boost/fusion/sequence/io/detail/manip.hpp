@@ -15,7 +15,7 @@
 #include <vector>
 #include <cctype>
 
-// Tuple I/O manipulators
+// Tuple I_/O manipulators
 
 #define FUSION_GET_CHAR_TYPE(T) typename T::char_type
 #define FUSION_GET_TRAITS_TYPE(T) typename T::traits_type

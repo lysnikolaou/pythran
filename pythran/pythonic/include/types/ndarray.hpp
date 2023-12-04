@@ -681,16 +681,16 @@ namespace types
     {
       return id();
     }
-    template <size_t I>
-    auto shape() const -> decltype(std::get<I>(_shape))
+    template <size_t I_>
+    auto shape() const -> decltype(std::get<I_>(_shape))
     {
-      return std::get<I>(_shape);
+      return std::get<I_>(_shape);
     }
 
-    template <size_t I>
-    auto strides() const -> decltype(std::get<I>(_strides))
+    template <size_t I_>
+    auto strides() const -> decltype(std::get<I_>(_strides))
     {
-      return std::get<I>(_strides);
+      return std::get<I_>(_strides);
     }
 
     operator pointer<T>()
@@ -714,40 +714,40 @@ PYTHONIC_NS_END
 namespace std
 {
 
-  template <size_t I, class E>
+  template <size_t I_, class E>
   auto get(E &&a) -> typename std::enable_if<
       pythonic::types::is_array<typename std::remove_cv<
           typename std::remove_reference<E>::type>::type>::value,
-      decltype(std::forward<E>(a)[I])>::type;
+      decltype(std::forward<E>(a)[I_])>::type;
 
-  template <size_t I, class T, class pS>
-  struct tuple_element<I, pythonic::types::ndarray<T, pS>> {
+  template <size_t I_, class T, class pS>
+  struct tuple_element<I_, pythonic::types::ndarray<T, pS>> {
     using type = typename pythonic::types::ndarray<T, pS>::value_type;
   };
 
-  template <size_t I, class Op, class... Args>
-  struct tuple_element<I, pythonic::types::numpy_expr<Op, Args...>> {
+  template <size_t I_, class Op, class... Args>
+  struct tuple_element<I_, pythonic::types::numpy_expr<Op, Args...>> {
     using type = typename pythonic::types::numpy_expr<Op, Args...>::dtype;
   };
 
-  template <size_t I, class E>
-  struct tuple_element<I, pythonic::types::numpy_iexpr<E>> {
+  template <size_t I_, class E>
+  struct tuple_element<I_, pythonic::types::numpy_iexpr<E>> {
     using type = decltype(std::declval<pythonic::types::numpy_iexpr<E>>()[0]);
   };
 
-  template <size_t I, class E>
-  struct tuple_element<I, pythonic::types::numpy_texpr<E>> {
+  template <size_t I_, class E>
+  struct tuple_element<I_, pythonic::types::numpy_texpr<E>> {
     using type = decltype(std::declval<pythonic::types::numpy_texpr<E>>()[0]);
   };
 
-  template <size_t I, class E, class... S>
-  struct tuple_element<I, pythonic::types::numpy_gexpr<E, S...>> {
+  template <size_t I_, class E, class... S>
+  struct tuple_element<I_, pythonic::types::numpy_gexpr<E, S...>> {
     using type =
         decltype(std::declval<pythonic::types::numpy_gexpr<E, S...>>()[0]);
   };
 
-  template <size_t I, class T, class F>
-  struct tuple_element<I, pythonic::types::numpy_vexpr<T, F>> {
+  template <size_t I_, class T, class F>
+  struct tuple_element<I_, pythonic::types::numpy_vexpr<T, F>> {
     using type = decltype(std::declval<pythonic::types::numpy_vexpr<T, F>>()[0]);
   };
 
@@ -1058,8 +1058,8 @@ struct __combined<pythonic::types::none_type, pythonic::types::ndarray<T, pS>> {
   using type = pythonic::types::none<pythonic::types::ndarray<T, pS>>;
 };
 
-template <class pS, class T, class C, class I>
-struct __combined<indexable_container<C, I>, pythonic::types::ndarray<T, pS>> {
+template <class pS, class T, class C, class I_>
+struct __combined<indexable_container<C, I_>, pythonic::types::ndarray<T, pS>> {
   using type = pythonic::types::ndarray<T, pS>;
 };
 

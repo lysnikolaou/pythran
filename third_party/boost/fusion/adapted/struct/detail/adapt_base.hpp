@@ -135,12 +135,12 @@
     };
 #endif
 
-#define BOOST_FUSION_ADAPT_STRUCT_BASE_UNPACK_AND_CALL(R,DATA,I,ATTRIBUTE)      \
+#define BOOST_FUSION_ADAPT_STRUCT_BASE_UNPACK_AND_CALL(R,DATA,I_,ATTRIBUTE)      \
     BOOST_PP_TUPLE_ELEM(4,0,DATA)(                                              \
         BOOST_PP_TUPLE_ELEM(4,1,DATA),                                          \
         BOOST_PP_TUPLE_ELEM(4,2,DATA),                                          \
         BOOST_PP_TUPLE_ELEM(4,3,DATA),                                          \
-        I,                                                                      \
+        I_,                                                                      \
         ATTRIBUTE)
 
 #ifdef BOOST_MSVC
@@ -162,7 +162,7 @@
 
 #define BOOST_FUSION_ADAPT_STRUCT_C_BASE(                                       \
     TEMPLATE_PARAMS_SEQ,NAME_SEQ,IS_VIEW,                                       \
-    I,PREFIX,ATTRIBUTE,ATTRIBUTE_TUPLE_SIZE,                                    \
+    I_,PREFIX,ATTRIBUTE,ATTRIBUTE_TUPLE_SIZE,                                    \
     DEDUCE_TYPE)                                                                \
                                                                                 \
     template<                                                                   \
@@ -170,7 +170,7 @@
     >                                                                           \
     struct access::struct_member<                                               \
         BOOST_FUSION_ADAPT_STRUCT_UNPACK_NAME(NAME_SEQ)                         \
-      , I                                                                       \
+      , I_                                                                       \
     >                                                                           \
     {                                                                           \
         BOOST_PP_IF(DEDUCE_TYPE,                                                \
@@ -215,7 +215,7 @@
     >                                                                           \
     struct struct_member_name<                                                  \
         BOOST_FUSION_ADAPT_STRUCT_UNPACK_NAME(NAME_SEQ)                         \
-      , I                                                                       \
+      , I_                                                                       \
     >                                                                           \
     {                                                                           \
         typedef char const* type;                                               \

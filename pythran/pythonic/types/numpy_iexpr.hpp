@@ -272,13 +272,13 @@ namespace types
     return offset;
   }
 
-  template <long I, class T0, class T1>
+  template <long I_, class T0, class T1>
   size_t compute_fast_offset(size_t offset, long mult, T0 const &indices,
-                             T1 const &shape, std::integral_constant<long, I>)
+                             T1 const &shape, std::integral_constant<long, I_>)
   {
-    return compute_fast_offset(offset + std::get<I - 1>(indices) * mult,
-                               mult * shape.template shape<I>(), indices, shape,
-                               std::integral_constant<long, I - 1>());
+    return compute_fast_offset(offset + std::get<I_ - 1>(indices) * mult,
+                               mult * shape.template shape<I_>(), indices, shape,
+                               std::integral_constant<long, I_ - 1>());
   }
 
   template <class Arg>
@@ -401,18 +401,18 @@ namespace types
     return offset;
   }
 
-  template <long I, class T0, class T1>
+  template <long I_, class T0, class T1>
   size_t compute_offset(size_t offset, long mult, T0 const &indices,
-                        T1 const &shape, std::integral_constant<long, I>)
+                        T1 const &shape, std::integral_constant<long, I_>)
   {
     return compute_offset(
         offset +
-            (std::get<I - 1>(indices) < 0
-                 ? std::get<I - 1>(indices) + shape.template shape<I>()
-                 : std::get<I - 1>(indices)) *
+            (std::get<I_ - 1>(indices) < 0
+                 ? std::get<I_ - 1>(indices) + shape.template shape<I_>()
+                 : std::get<I_ - 1>(indices)) *
                 mult,
-        mult * shape.template shape<I>(), indices, shape,
-        std::integral_constant<long, I - 1>());
+        mult * shape.template shape<I_>(), indices, shape,
+        std::integral_constant<long, I_ - 1>());
   }
 
   template <class Arg>

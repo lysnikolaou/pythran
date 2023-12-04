@@ -295,10 +295,10 @@ enum{
    need_k = 2
 };
 
-// Compute I(v, x) and K(v, x) simultaneously by Temme's method, see
+// Compute I_(v, x) and K(v, x) simultaneously by Temme's method, see
 // Temme, Journal of Computational Physics, vol 19, 324 (1975)
 template <typename T, typename Policy>
-int bessel_ik(T v, T x, T* I, T* K, int kind, const Policy& pol)
+int bessel_ik(T v, T x, T* I_, T* K, int kind, const Policy& pol)
 {
     // Kv1 = K_(v+1), fv = I_(v+1) / I_v
     // Ku1 = K_(u+1), fu = I_(u+1) / I_u
@@ -330,7 +330,7 @@ int bessel_ik(T v, T x, T* I, T* K, int kind, const Policy& pol)
 
     if (x < 0)
     {
-       *I = *K = policies::raise_domain_error<T>(function,
+       *I_ = *K = policies::raise_domain_error<T>(function,
             "Got x = %1% but real argument x must be non-negative, complex number result not supported.", x, pol);
         return 1;
     }
@@ -354,7 +354,7 @@ int bessel_ik(T v, T x, T* I, T* K, int kind, const Policy& pol)
                policies::raise_overflow_error<T>(function, 0, pol);   // reflection formula
        }
 
-       *I = Iv;
+       *I_ = Iv;
        *K = Kv;
        return 0;
     }
@@ -426,21 +426,21 @@ int bessel_ik(T v, T x, T* I, T* K, int kind, const Policy& pol)
         T z = (u + n % 2);
         T fact = (2 / pi<T>()) * (boost::math::sin_pi(z) * Kv);
         if(fact == 0)
-           *I = Iv;
+           *I_ = Iv;
         else if(tools::max_value<T>() * scale < fact)
-           *I = (org_kind & need_i) ? T(sign(fact) * scale_sign * policies::raise_overflow_error<T>(function, 0, pol)) : T(0);
+           *I_ = (org_kind & need_i) ? T(sign(fact) * scale_sign * policies::raise_overflow_error<T>(function, 0, pol)) : T(0);
         else
-         *I = Iv + fact / scale;   // reflection formula
+         *I_ = Iv + fact / scale;   // reflection formula
     }
     else
     {
-        *I = Iv;
+        *I_ = Iv;
     }
     if(tools::max_value<T>() * scale < Kv)
        *K = (org_kind & need_k) ? T(sign(Kv) * scale_sign * policies::raise_overflow_error<T>(function, 0, pol)) : T(0);
     else
       *K = Kv / scale;
-    BOOST_MATH_INSTRUMENT_VARIABLE(*I);
+    BOOST_MATH_INSTRUMENT_VARIABLE(*I_);
     BOOST_MATH_INSTRUMENT_VARIABLE(*K);
     return 0;
 }

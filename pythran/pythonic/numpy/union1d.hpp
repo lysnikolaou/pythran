@@ -14,15 +14,15 @@ namespace numpy
 {
   namespace
   {
-    template <class I, class O>
-    void _union1d(I begin, I end, O &out, utils::int_<1>)
+    template <class I_, class O>
+    void _union1d(I_ begin, I_ end, O &out, utils::int_<1>)
     {
       for (; begin != end; ++begin)
         out.insert(*begin);
     }
 
-    template <class I, class O, size_t N>
-    void _union1d(I begin, I end, O &out, utils::int_<N>)
+    template <class I_, class O, size_t N>
+    void _union1d(I_ begin, I_ end, O &out, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _union1d((*begin).begin(), (*begin).end(), out, utils::int_<N - 1>());

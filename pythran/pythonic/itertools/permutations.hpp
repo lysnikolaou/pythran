@@ -54,14 +54,14 @@ namespace itertools
     return res;
   }
 
-  template <class T, class I>
-  types::dynamic_tuple<T> init_permut_from(I begin, I end,
+  template <class T, class I_>
+  types::dynamic_tuple<T> init_permut_from(I_ begin, I_ end,
                                            types::dynamic_tuple<T> *)
   {
     return {begin, end};
   }
-  template <class T, size_t N, class I>
-  types::array<T, N> init_permut_from(I begin, I end, types::array<T, N> *)
+  template <class T, size_t N, class I_>
+  types::array<T, N> init_permut_from(I_ begin, I_ end, types::array<T, N> *)
   {
     types::array<T, N> res;
     std::copy(begin, end, res.begin());

@@ -36,25 +36,25 @@ PYTHONIC_NS_END
 
 namespace std
 {
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::pointer<T>::reference
   get(pythonic::types::pointer<T> &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::pointer<T>::value_type
   get(pythonic::types::pointer<T> const &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::pointer<T>::value_type
   get(pythonic::types::pointer<T> &&t)
   {
-    return t[I];
+    return t[I_];
   }
 }
 

@@ -11,7 +11,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 We need to include an STD header to gives us the context
 of which library we are using. The "smallest" code-wise header
 seems to be <exception>. Boost uses <utility> but as far
-as I can tell (RR) it's not a stand-alone header in most
+as I_ can tell (RR) it's not a stand-alone header in most
 implementations. Using <exception> also has the benefit of
 being available in EC++, so we get a chance to make this work
 for embedded users. And since it's not a header impacted by TR1

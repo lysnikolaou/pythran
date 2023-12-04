@@ -18,7 +18,7 @@ namespace boost {
 
 namespace optional_detail {
 // This local class is used instead of that in "aligned_storage.hpp"
-// because I've found the 'official' class to ICE BCB5.5
+// because I_'ve found the 'official' class to ICE BCB5.5
 // when some types are used with optional<>
 // (due to sizeof() passed down as a non-type template parameter)
 template <class T>

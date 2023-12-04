@@ -2118,7 +2118,7 @@ namespace pocketfft
         for (size_t k = 0; k < l1; k++)
           for (size_t i = 2, ic = ido - 2; i < ido; i += 2, ic -= 2) {
             T tr2 =
-                CC(i - 1, 2, k) + CC(ic - 1, 1, k); // t2=CC(I) + conj(CC(ic))
+                CC(i - 1, 2, k) + CC(ic - 1, 1, k); // t2=CC(I_) + conj(CC(ic))
             T ti2 = CC(i, 2, k) - CC(ic, 1, k);
             T cr2 = CC(i - 1, 0, k) + taur * tr2; // c2=CC +taur*t2
             T ci2 = CC(i, 0, k) + taur * ti2;

@@ -117,7 +117,7 @@ namespace types
   }
 
   template <class T, class B>
-  template <size_t I>
+  template <size_t I_>
   std::integral_constant<long, 1> broadcast<T, B>::shape() const
   {
     return {};

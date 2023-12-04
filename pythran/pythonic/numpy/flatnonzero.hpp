@@ -11,16 +11,16 @@ namespace numpy
 {
   namespace
   {
-    template <class I, class O>
-    void _flatnonzero(I begin, I end, O &out, long &i, utils::int_<1>)
+    template <class I_, class O>
+    void _flatnonzero(I_ begin, I_ end, O &out, long &i, utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i)
         if (*begin)
           *out++ = i;
     }
 
-    template <class I, class O, size_t N>
-    void _flatnonzero(I begin, I end, O &out, long &i, utils::int_<N>)
+    template <class I_, class O, size_t N>
+    void _flatnonzero(I_ begin, I_ end, O &out, long &i, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _flatnonzero((*begin).begin(), (*begin).end(), out, i,

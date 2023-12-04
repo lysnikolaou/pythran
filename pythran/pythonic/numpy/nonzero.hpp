@@ -13,11 +13,11 @@ namespace numpy
 
   namespace
   {
-    template <class I, class O, size_t M>
-    void _nonzero(I begin, I end, O &out, types::array<long, M> &curr,
+    template <class I_, class O, size_t M>
+    void _nonzero(I_ begin, I_ end, O &out, types::array<long, M> &curr,
                   utils::int_<1>)
     {
-      I start = begin;
+      I_ start = begin;
       for (; begin != end; ++begin) {
         curr[M - 1] = begin - start;
         if (*begin)
@@ -28,11 +28,11 @@ namespace numpy
       }
     }
 
-    template <class I, class O, size_t M, size_t N>
-    void _nonzero(I begin, I end, O &out, types::array<long, M> &curr,
+    template <class I_, class O, size_t M, size_t N>
+    void _nonzero(I_ begin, I_ end, O &out, types::array<long, M> &curr,
                   utils::int_<N>)
     {
-      I start = begin;
+      I_ start = begin;
       for (; begin != end; ++begin) {
         curr[M - N] = begin - start;
         _nonzero((*begin).begin(), (*begin).end(), out, curr,

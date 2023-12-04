@@ -24,8 +24,8 @@ namespace builtins
     X get(types::empty_dict const &, W const &, X const &default_);
 
     // For typing only
-    template <class T, class I, class J>
-    typename __combined<T, J>::type get(::dict_container<T>, I, J);
+    template <class T, class I_, class J>
+    typename __combined<T, J>::type get(::dict_container<T>, I_, J);
 
     DEFINE_FUNCTOR(pythonic::builtins::dict, get);
   }

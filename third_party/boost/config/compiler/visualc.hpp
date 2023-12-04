@@ -290,7 +290,7 @@
 // IOW, you can't use these 'versions' in any sensible way. Sorry.
 # if defined(UNDER_CE)
 #   if _MSC_VER < 1400
-      // Note: I'm not aware of any CE compiler with version 13xx
+      // Note: I_'m not aware of any CE compiler with version 13xx
 #      if defined(BOOST_ASSERT_CONFIG)
 #         error "boost: Unknown EVC++ compiler version - please run the configure tests and report the results"
 #      else

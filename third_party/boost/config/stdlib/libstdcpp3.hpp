@@ -107,7 +107,7 @@
 //  __GNUC_PATCHLEVEL__ at the suggestion of Jonathan Wakely, one of the libstdc++
 //  developers. He also commented:
 //
-//       "I'm not sure how useful __GLIBCXX__ is for your purposes, for instance in
+//       "I_'m not sure how useful __GLIBCXX__ is for your purposes, for instance in
 //       GCC 4.2.4 it is set to 20080519 but in GCC 4.3.0 it is set to 20080305.
 //       Although 4.3.0 was released earlier than 4.2.4, it has better C++0x support
 //       than any release in the 4.2 series."

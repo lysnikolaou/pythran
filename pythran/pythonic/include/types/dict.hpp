@@ -27,35 +27,35 @@ namespace types
 
   struct empty_dict;
 
-  template <class I>
-  struct item_iterator_adaptator : public I {
+  template <class I_>
+  struct item_iterator_adaptator : public I_ {
     using value_type = make_tuple_t<
-        typename std::remove_cv<typename I::value_type::first_type>::type,
-        typename I::value_type::second_type>;
+        typename std::remove_cv<typename I_::value_type::first_type>::type,
+        typename I_::value_type::second_type>;
     using pointer = value_type *;
     using reference = value_type &;
     item_iterator_adaptator() = default;
-    item_iterator_adaptator(I const &i);
+    item_iterator_adaptator(I_ const &i);
     value_type operator*() const;
   };
 
-  template <class I>
-  struct key_iterator_adaptator : public I {
-    using value_type = typename I::value_type::first_type;
-    using pointer = typename I::value_type::first_type *;
-    using reference = typename I::value_type::first_type &;
+  template <class I_>
+  struct key_iterator_adaptator : public I_ {
+    using value_type = typename I_::value_type::first_type;
+    using pointer = typename I_::value_type::first_type *;
+    using reference = typename I_::value_type::first_type &;
     key_iterator_adaptator();
-    key_iterator_adaptator(I const &i);
+    key_iterator_adaptator(I_ const &i);
     value_type operator*() const;
   };
 
-  template <class I>
-  struct value_iterator_adaptator : public I {
-    using value_type = typename I::value_type::second_type;
-    using pointer = typename I::value_type::second_type *;
-    using reference = typename I::value_type::second_type &;
+  template <class I_>
+  struct value_iterator_adaptator : public I_ {
+    using value_type = typename I_::value_type::second_type;
+    using pointer = typename I_::value_type::second_type *;
+    using reference = typename I_::value_type::second_type &;
     value_iterator_adaptator();
-    value_iterator_adaptator(I const &i);
+    value_iterator_adaptator(I_ const &i);
     value_type operator*() const;
   };
 
@@ -277,14 +277,14 @@ PYTHONIC_NS_END
 /* overload std::get */
 namespace std
 {
-  template <size_t I, class K, class V>
-  auto get(pythonic::types::dict<K, V> &d) -> decltype(d[I]);
+  template <size_t I_, class K, class V>
+  auto get(pythonic::types::dict<K, V> &d) -> decltype(d[I_]);
 
-  template <size_t I, class K, class V>
-  auto get(pythonic::types::dict<K, V> const &d) -> decltype(d[I]);
+  template <size_t I_, class K, class V>
+  auto get(pythonic::types::dict<K, V> const &d) -> decltype(d[I_]);
 
-  template <size_t I, class K, class V>
-  struct tuple_element<I, pythonic::types::dict<K, V>> {
+  template <size_t I_, class K, class V>
+  struct tuple_element<I_, pythonic::types::dict<K, V>> {
     using type = V;
   };
 } // namespace std

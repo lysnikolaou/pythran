@@ -111,7 +111,7 @@ namespace numpy
         return fast(i);
       }
 
-      template <size_t I>
+      template <size_t I_>
       long shape() const
       {
         return size;

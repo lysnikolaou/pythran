@@ -12,15 +12,15 @@ namespace numpy
 {
   namespace
   {
-    template <class I, class O>
-    void _tile(I begin, I end, O &out, long rep, utils::int_<1>)
+    template <class I_, class O>
+    void _tile(I_ begin, I_ end, O &out, long rep, utils::int_<1>)
     {
       for (long i = 0; i < rep; ++i)
         out = std::copy(begin, end, out);
     }
 
-    template <class I, class O, size_t N>
-    void _tile(I begin, I end, O &out, long rep, utils::int_<N>)
+    template <class I_, class O, size_t N>
+    void _tile(I_ begin, I_ end, O &out, long rep, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _tile((*begin).begin(), (*begin).end(), out, rep, utils::int_<N - 1>());

@@ -841,7 +841,7 @@ Complex complex_newton(F g, Complex guess, int max_iterations = std::numeric_lim
    // The idea is that if we can get abs(f) < eps, we should, but if we go through all these iterations
    // and abs(f) < sqrt(eps), then roundoff error simply does not allow that we can evaluate f to < eps
    // This is somewhat awkward as it isn't scale invariant, but using the Daubechies coefficient example code,
-   // I found this condition generates correct roots, whereas the scale invariant condition discussed here:
+   // I_ found this condition generates correct roots, whereas the scale invariant condition discussed here:
    // https://scicomp.stackexchange.com/questions/30597/defining-a-condition-number-and-termination-criteria-for-newtons-method
    // allows nonroots to be passed off as roots.
    auto pair = g(z2);
@@ -912,7 +912,7 @@ std::pair<T, T> quadratic_roots_imp(T const& a, T const& b, T const& c)
       }
       T discriminant = detail::discriminant(a, b, c);
       // Is there a sane way to flush very small negative values to zero?
-      // If there is I don't know of it.
+      // If there is I_ don't know of it.
       if (discriminant < 0)
       {
          return std::pair<T, T>(nan, nan);

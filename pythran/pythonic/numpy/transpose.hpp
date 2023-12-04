@@ -29,18 +29,18 @@ namespace numpy
     }
 
     template <class T, class pS, class O, class Indices, class S, class Perm,
-              size_t I>
-    typename std::enable_if<std::tuple_size<pS>::value - 1 != I,
+              size_t I_>
+    typename std::enable_if<std::tuple_size<pS>::value - 1 != I_,
                             O const *>::type
     _transposer(types::ndarray<T, pS> &expr, O const *iter, Indices &indices,
-                S const &shape, Perm const &perm, utils::int_<I>)
+                S const &shape, Perm const &perm, utils::int_<I_>)
     {
-      for (long i = 0, n = shape[I]; i < n; ++i) {
-        indices[perm[I]] = i;
+      for (long i = 0, n = shape[I_]; i < n; ++i) {
+        indices[perm[I_]] = i;
         iter =
-            _transposer(expr, iter, indices, shape, perm, utils::int_<I + 1>());
+            _transposer(expr, iter, indices, shape, perm, utils::int_<I_ + 1>());
       }
-      indices[perm[I]] = 0;
+      indices[perm[I_]] = 0;
       return iter;
     }
     template <class T, class pS>

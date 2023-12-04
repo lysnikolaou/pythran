@@ -50,8 +50,8 @@
 
 #define FUSION_VECTOR_MEMBER_ITER_DECL_VAR(z, n, _)                             \
     typedef typename result_of::next<                                           \
-        BOOST_PP_CAT(I, BOOST_PP_DEC(n))>::type BOOST_PP_CAT(I, n);             \
-    BOOST_PP_CAT(I, n) BOOST_PP_CAT(i, n)                                       \
+        BOOST_PP_CAT(I_, BOOST_PP_DEC(n))>::type BOOST_PP_CAT(I_, n);             \
+    BOOST_PP_CAT(I_, n) BOOST_PP_CAT(i, n)                                       \
         = fusion::next(BOOST_PP_CAT(i, BOOST_PP_DEC(n)));
 
 #endif
@@ -334,20 +334,20 @@ FUSION_HASH endif
 
         BOOST_PP_REPEAT(N, FUSION_VECTOR_MEMBER_AT_IMPL, _)
 
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
 
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
 

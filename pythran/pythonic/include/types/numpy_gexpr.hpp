@@ -249,13 +249,13 @@ namespace types
 
     template <>
     struct merge_gexpr<std::tuple<>, std::tuple<>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       std::tuple<> run(S const &, std::tuple<> const &t0, std::tuple<> const &);
     };
 
     template <class... T0>
     struct merge_gexpr<std::tuple<T0...>, std::tuple<>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       std::tuple<T0...> run(S const &, std::tuple<T0...> const &t0,
                             std::tuple<>);
       static_assert(
@@ -265,25 +265,25 @@ namespace types
 
     template <class... T1>
     struct merge_gexpr<std::tuple<>, std::tuple<T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       std::tuple<normalize_t<T1>...> run(S const &, std::tuple<>,
                                          std::tuple<T1...> const &t1);
     };
 
     template <class S0, class... T0, class S1, class... T1>
     struct merge_gexpr<std::tuple<S0, T0...>, std::tuple<S1, T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       auto run(S const &s, std::tuple<S0, T0...> const &t0,
                std::tuple<S1, T1...> const &t1)
           -> decltype(tuple_push_head(
               std::get<0>(t0) * std::get<0>(t1),
               merge_gexpr<std::tuple<T0...>, std::tuple<T1...>>{}
-                  .template run<I + 1>(s, tuple_tail(t0), tuple_tail(t1))))
+                  .template run<I_ + 1>(s, tuple_tail(t0), tuple_tail(t1))))
       {
         return tuple_push_head(
             std::get<0>(t0) * std::get<0>(t1),
             merge_gexpr<std::tuple<T0...>, std::tuple<T1...>>{}
-                .template run<I + 1>(s, tuple_tail(t0), tuple_tail(t1)));
+                .template run<I_ + 1>(s, tuple_tail(t0), tuple_tail(t1)));
       }
       static_assert(
           std::is_same<decltype(std::declval<S0>() * std::declval<S1>()),
@@ -294,101 +294,101 @@ namespace types
 
     template <class... T1>
     struct merge_gexpr<std::tuple<>, std::tuple<none_type, T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       auto run(S const &s, std::tuple<> const &t0,
                std::tuple<none_type, T1...> const &t1)
           -> decltype(tuple_push_head(
               std::get<0>(t1), merge_gexpr<std::tuple<>, std::tuple<T1...>>{}
-                                   .template run<I + 1>(s, t0, tuple_tail(t1))))
+                                   .template run<I_ + 1>(s, t0, tuple_tail(t1))))
       {
         return tuple_push_head(
             std::get<0>(t1),
-            merge_gexpr<std::tuple<>, std::tuple<T1...>>{}.template run<I + 1>(
+            merge_gexpr<std::tuple<>, std::tuple<T1...>>{}.template run<I_ + 1>(
                 s, t0, tuple_tail(t1)));
       }
     };
 
     template <class S0, class... T0, class... T1>
     struct merge_gexpr<std::tuple<S0, T0...>, std::tuple<none_type, T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       auto run(S const &s, std::tuple<S0, T0...> const &t0,
                std::tuple<none_type, T1...> const &t1)
           -> decltype(tuple_push_head(
               std::get<0>(t1),
               merge_gexpr<std::tuple<S0, T0...>, std::tuple<T1...>>{}
-                  .template run<I + 1>(s, t0, tuple_tail(t1))))
+                  .template run<I_ + 1>(s, t0, tuple_tail(t1))))
       {
         return tuple_push_head(
             std::get<0>(t1),
             merge_gexpr<std::tuple<S0, T0...>, std::tuple<T1...>>{}
-                .template run<I + 1>(s, t0, tuple_tail(t1)));
+                .template run<I_ + 1>(s, t0, tuple_tail(t1)));
       }
     };
 
     template <class... T0, class S1, class... T1>
     struct merge_gexpr<std::tuple<long, T0...>, std::tuple<S1, T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       auto run(S const &s, std::tuple<long, T0...> const &t0,
                std::tuple<S1, T1...> const &t1)
           -> decltype(tuple_push_head(
               std::get<0>(t0),
               merge_gexpr<std::tuple<T0...>, std::tuple<S1, T1...>>{}
-                  .template run<I>(s, tuple_tail(t0), t1)))
+                  .template run<I_>(s, tuple_tail(t0), t1)))
       {
         return tuple_push_head(
             std::get<0>(t0),
             merge_gexpr<std::tuple<T0...>, std::tuple<S1, T1...>>{}
-                .template run<I>(s, tuple_tail(t0), t1));
+                .template run<I_>(s, tuple_tail(t0), t1));
       }
     };
     template <class... T0, class... T1>
     struct merge_gexpr<std::tuple<long, T0...>, std::tuple<none_type, T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       auto run(S const &s, std::tuple<long, T0...> const &t0,
                std::tuple<none_type, T1...> const &t1)
           -> decltype(tuple_push_head(
               std::get<0>(t0),
               merge_gexpr<std::tuple<T0...>, std::tuple<none_type, T1...>>{}
-                  .template run<I>(s, tuple_tail(t0), t1)))
+                  .template run<I_>(s, tuple_tail(t0), t1)))
       {
         return tuple_push_head(
             std::get<0>(t0),
             merge_gexpr<std::tuple<T0...>, std::tuple<none_type, T1...>>{}
-                .template run<I>(s, tuple_tail(t0), t1));
+                .template run<I_>(s, tuple_tail(t0), t1));
       }
     };
 
     template <class S0, class... T0, class... T1>
     struct merge_gexpr<std::tuple<S0, T0...>, std::tuple<long, T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       auto run(S const &s, std::tuple<S0, T0...> const &t0,
                std::tuple<long, T1...> const &t1)
           -> decltype(tuple_push_head(
               std::get<0>(t1),
               merge_gexpr<std::tuple<T0...>, std::tuple<T1...>>{}
-                  .template run<I + 1>(s, tuple_tail(t0), tuple_tail(t1))))
+                  .template run<I_ + 1>(s, tuple_tail(t0), tuple_tail(t1))))
       {
         return tuple_push_head(
             std::get<0>(t1) * std::get<0>(t0).step + std::get<0>(t0).lower,
             merge_gexpr<std::tuple<T0...>, std::tuple<T1...>>{}
-                .template run<I + 1>(s, tuple_tail(t0), tuple_tail(t1)));
+                .template run<I_ + 1>(s, tuple_tail(t0), tuple_tail(t1)));
       }
     };
 
     template <class... T0, class... T1>
     struct merge_gexpr<std::tuple<long, T0...>, std::tuple<long, T1...>> {
-      template <size_t I, class S>
+      template <size_t I_, class S>
       auto run(S const &s, std::tuple<long, T0...> const &t0,
                std::tuple<long, T1...> const &t1)
           -> decltype(tuple_push_head(
               std::get<0>(t0),
               merge_gexpr<std::tuple<T0...>, std::tuple<long, T1...>>{}
-                  .template run<I>(s, tuple_tail(t0), t1)))
+                  .template run<I_>(s, tuple_tail(t0), t1)))
       {
         return tuple_push_head(
             std::get<0>(t0),
             merge_gexpr<std::tuple<T0...>, std::tuple<long, T1...>>{}
-                .template run<I>(s, tuple_tail(t0), t1));
+                .template run<I_>(s, tuple_tail(t0), t1));
       }
     };
 
@@ -649,15 +649,15 @@ namespace types
                          types::array<long, 1>>::type>
         _strides; // strides
 
-    template <size_t I>
-    auto shape() const -> decltype(std::get<I>(_shape))
+    template <size_t I_>
+    auto shape() const -> decltype(std::get<I_>(_shape))
     {
-      return std::get<I>(_shape);
+      return std::get<I_>(_shape);
     }
-    template <size_t I>
-    auto strides() const -> decltype(std::get<I>(_strides))
+    template <size_t I_>
+    auto strides() const -> decltype(std::get<I_>(_strides))
     {
-      return std::get<I>(_strides);
+      return std::get<I_>(_strides);
     }
 
     numpy_gexpr();
@@ -673,15 +673,15 @@ namespace types
     typename std::enable_if<is_normalized_slice<Slice>::value, void>::type
     init_shape(Slice const &s, utils::int_<1>, utils::int_<J>);
 
-    template <size_t I, size_t J, class Slice>
+    template <size_t I_, size_t J, class Slice>
     typename std::enable_if<is_normalized_slice<Slice>::value, void>::type
-    init_shape(Slice const &s, utils::int_<I>, utils::int_<J>);
+    init_shape(Slice const &s, utils::int_<I_>, utils::int_<J>);
 
     template <size_t J>
     void init_shape(long cs, utils::int_<1>, utils::int_<J>);
 
-    template <size_t I, size_t J>
-    void init_shape(long cs, utils::int_<I>, utils::int_<J>);
+    template <size_t I_, size_t J>
+    void init_shape(long cs, utils::int_<I_>, utils::int_<J>);
 
     // private because we must use the make_gexpr factory to create a gexpr
   private:

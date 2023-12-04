@@ -13,11 +13,11 @@ namespace numpy
 {
   namespace details
   {
-    template <class E, class S, size_t... I>
-    auto flip(E const &expr, S const &slices, utils::index_sequence<I...>)
-        -> decltype(expr(slices[I]...))
+    template <class E, class S, size_t... I_>
+    auto flip(E const &expr, S const &slices, utils::index_sequence<I_...>)
+        -> decltype(expr(slices[I_]...))
     {
-      return expr(slices[I]...);
+      return expr(slices[I_]...);
     }
   }
 

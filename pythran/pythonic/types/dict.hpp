@@ -23,51 +23,51 @@ namespace types
 {
   /// item implementation
 
-  template <class I>
-  item_iterator_adaptator<I>::item_iterator_adaptator(I const &i) : I(i)
+  template <class I_>
+  item_iterator_adaptator<I_>::item_iterator_adaptator(I_ const &i) : I_(i)
   {
   }
 
-  template <class I>
-  typename item_iterator_adaptator<I>::value_type
-  item_iterator_adaptator<I>::operator*() const
+  template <class I_>
+  typename item_iterator_adaptator<I_>::value_type
+  item_iterator_adaptator<I_>::operator*() const
   {
-    auto &&tmp = I::operator*();
+    auto &&tmp = I_::operator*();
     return pythonic::types::make_tuple(tmp.first, tmp.second);
   }
 
   /// key_iterator_adaptator implementation
-  template <class I>
-  key_iterator_adaptator<I>::key_iterator_adaptator() : I()
+  template <class I_>
+  key_iterator_adaptator<I_>::key_iterator_adaptator() : I_()
   {
   }
 
-  template <class I>
-  key_iterator_adaptator<I>::key_iterator_adaptator(I const &i) : I(i)
+  template <class I_>
+  key_iterator_adaptator<I_>::key_iterator_adaptator(I_ const &i) : I_(i)
   {
   }
 
-  template <class I>
-  typename key_iterator_adaptator<I>::value_type
-  key_iterator_adaptator<I>::operator*() const
+  template <class I_>
+  typename key_iterator_adaptator<I_>::value_type
+  key_iterator_adaptator<I_>::operator*() const
   {
     return (*this)->first;
   }
 
   /// value_iterator_adaptator implementation
-  template <class I>
-  value_iterator_adaptator<I>::value_iterator_adaptator() : I()
+  template <class I_>
+  value_iterator_adaptator<I_>::value_iterator_adaptator() : I_()
   {
   }
 
-  template <class I>
-  value_iterator_adaptator<I>::value_iterator_adaptator(I const &i) : I(i)
+  template <class I_>
+  value_iterator_adaptator<I_>::value_iterator_adaptator(I_ const &i) : I_(i)
   {
   }
 
-  template <class I>
-  typename value_iterator_adaptator<I>::value_type
-  value_iterator_adaptator<I>::operator*() const
+  template <class I_>
+  typename value_iterator_adaptator<I_>::value_type
+  value_iterator_adaptator<I_>::operator*() const
   {
     return (*this)->second;
   }
@@ -560,16 +560,16 @@ PYTHONIC_NS_END
 /* overload std::get */
 namespace std
 {
-  template <size_t I, class K, class V>
-  auto get(pythonic::types::dict<K, V> &d) -> decltype(d[I])
+  template <size_t I_, class K, class V>
+  auto get(pythonic::types::dict<K, V> &d) -> decltype(d[I_])
   {
-    return d[I];
+    return d[I_];
   }
 
-  template <size_t I, class K, class V>
-  auto get(pythonic::types::dict<K, V> const &d) -> decltype(d[I])
+  template <size_t I_, class K, class V>
+  auto get(pythonic::types::dict<K, V> const &d) -> decltype(d[I_])
   {
-    return d[I];
+    return d[I_];
   }
 } // namespace std
 #ifdef ENABLE_PYTHON_MODULE

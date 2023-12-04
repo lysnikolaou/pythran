@@ -13,13 +13,13 @@ namespace numpy
 
   namespace wrapper
   {
-    template <class I>
-    typename std::enable_if<types::is_complex<I>::value, bool>::type
-    isreal(I const &a);
+    template <class I_>
+    typename std::enable_if<types::is_complex<I_>::value, bool>::type
+    isreal(I_ const &a);
 
-    template <class I>
-    typename std::enable_if<!types::is_complex<I>::value, bool>::type
-    isreal(I const &a);
+    template <class I_>
+    typename std::enable_if<!types::is_complex<I_>::value, bool>::type
+    isreal(I_ const &a);
   }
 
 #define NUMPY_NARY_FUNC_NAME isreal

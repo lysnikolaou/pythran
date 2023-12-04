@@ -15,17 +15,17 @@ namespace numpy
   namespace details
   {
 
-    template <size_t I>
+    template <size_t I_>
     struct lexcmp_nth {
       template <class K>
       bool operator()(K const &keys, long i0, long i1) const
       {
-        if (std::get<I - 1>(keys)[i0] < std::get<I - 1>(keys)[i1])
+        if (std::get<I_ - 1>(keys)[i0] < std::get<I_ - 1>(keys)[i1])
           return true;
-        else if (std::get<I - 1>(keys)[i0] > std::get<I - 1>(keys)[i1])
+        else if (std::get<I_ - 1>(keys)[i0] > std::get<I_ - 1>(keys)[i1])
           return false;
         else
-          return lexcmp_nth<I - 1>{}(keys, i0, i1);
+          return lexcmp_nth<I_ - 1>{}(keys, i0, i1);
       }
     };
     template <>

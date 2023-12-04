@@ -52,10 +52,10 @@ namespace boost { namespace fusion { namespace advance_detail
             return i;
         }
 
-        template <typename I>
+        template <typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
         static type
-        call(I const& i)
+        call(I_ const& i)
         {
             return call(fusion::next(i));
         }
@@ -93,10 +93,10 @@ namespace boost { namespace fusion { namespace advance_detail
             return i;
         }
 
-        template <typename I>
+        template <typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
         static type
-        call(I const& i)
+        call(I_ const& i)
         {
             return call(fusion::prior(i));
         }

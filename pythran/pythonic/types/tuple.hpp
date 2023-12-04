@@ -73,10 +73,10 @@ namespace types
                               utils::make_index_sequence<sizeof...(Stail)>{});
   }
 
-  template <class T, size_t N, class V, class A, size_t... I>
-  array_base<T, N, V> array_to_array(A const &a, utils::index_sequence<I...>)
+  template <class T, size_t N, class V, class A, size_t... I_>
+  array_base<T, N, V> array_to_array(A const &a, utils::index_sequence<I_...>)
   {
-    return {(T)std::get<I>(a)...};
+    return {(T)std::get<I_>(a)...};
   }
 
   /* inspired by std::array implementation */
@@ -498,11 +498,11 @@ PYTHONIC_NS_BEGIN
 
 namespace types
 {
-  template <class Tuple, size_t I>
-  void print_tuple(std::ostream &os, Tuple const &t, utils::int_<I>)
+  template <class Tuple, size_t I_>
+  void print_tuple(std::ostream &os, Tuple const &t, utils::int_<I_>)
   {
-    print_tuple(os, t, utils::int_<I - 1>());
-    os << ", " << std::get<I>(t);
+    print_tuple(os, t, utils::int_<I_ - 1>());
+    os << ", " << std::get<I_>(t);
   }
 
   template <class Tuple>

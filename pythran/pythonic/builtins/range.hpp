@@ -137,10 +137,10 @@ PYTHONIC_NS_END
 /* overload std::get */
 namespace std
 {
-  template <size_t I>
+  template <size_t I_>
   long get(pythonic::builtins::range const &t)
   {
-    return t[I];
+    return t[I_];
   }
 } // namespace std
 

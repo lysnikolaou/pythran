@@ -41,10 +41,10 @@ namespace types
 
     Arg arg;
     using shape_t = sutils::transpose_t<typename E::shape_t>;
-    template <size_t I>
-    auto shape() const -> decltype(arg.template shape < I == 0 ? 1 : 0 > ())
+    template <size_t I_>
+    auto shape() const -> decltype(arg.template shape < I_ == 0 ? 1 : 0 > ())
     {
-      return arg.template shape < I == 0 ? 1 : 0 > ();
+      return arg.template shape < I_ == 0 ? 1 : 0 > ();
     }
 
     numpy_texpr_2();
@@ -198,12 +198,12 @@ namespace types
                                                  pythonic::builtins::None),
                            (s0.step, s0)))>;
 
-    template <class S, size_t... I>
-    auto _reverse_index(S const &indices, utils::index_sequence<I...>) const
+    template <class S, size_t... I_>
+    auto _reverse_index(S const &indices, utils::index_sequence<I_...>) const
         -> decltype(
-            numpy::functor::transpose{}(this->arg(std::get<I>(indices)...)))
+            numpy::functor::transpose{}(this->arg(std::get<I_>(indices)...)))
     {
-      return numpy::functor::transpose{}(arg(std::get<I>(indices)...));
+      return numpy::functor::transpose{}(arg(std::get<I_>(indices)...));
     }
     ndarray<dtype, typename E::shape_t> copy() const
     {
@@ -317,7 +317,7 @@ namespace types
     using shape_t = types::array<long, value>;
     using iterator = nditerator<numpy_texpr<broadcasted<E>>>;
     using const_iterator = const_nditerator<numpy_texpr<broadcasted<E>>>;
-    // FIXME: I've got the feeling that this could be improved
+    // FIXME: I_'ve got the feeling that this could be improved
     static constexpr bool is_vectorizable = false;
     static constexpr bool is_strided = true;
 
@@ -347,10 +347,10 @@ namespace types
     {
       return arg.ref.fast(i);
     }
-    template <size_t I>
+    template <size_t I_>
     long shape() const
     {
-      return arg.template shape < I == 0 ? 1 : 0 > ();
+      return arg.template shape < I_ == 0 ? 1 : 0 > ();
     }
     auto load(long i, long j) const -> decltype(arg.ref.load(i))
     {

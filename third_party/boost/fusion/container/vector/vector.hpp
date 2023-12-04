@@ -177,13 +177,13 @@ namespace boost { namespace fusion
         static inline BOOST_FUSION_GPU_ENABLED
         store<J, U> store_at_impl(store<J, U>*);
 
-        template <typename I, typename ...T>
+        template <typename I_, typename ...T>
         struct vector_data;
 
-        template <std::size_t ...I, typename ...T>
-        struct vector_data<detail::index_sequence<I...>, T...>
-            : store<I, T>...
-            , sequence_base<vector_data<detail::index_sequence<I...>, T...> >
+        template <std::size_t ...I_, typename ...T>
+        struct vector_data<detail::index_sequence<I_...>, T...>
+            : store<I_, T>...
+            , sequence_base<vector_data<detail::index_sequence<I_...>, T...> >
         {
             typedef vector_tag                  fusion_tag;
             typedef fusion_sequence_tag         tag; // this gets picked up by MPL
@@ -199,20 +199,20 @@ namespace boost { namespace fusion
                 typename Sequence
               , typename Sequence_ = typename remove_reference<Sequence>::type
               , typename = typename boost::enable_if<
-                    can_convert<vector_data, Sequence, Sequence_, sizeof...(I)>
+                    can_convert<vector_data, Sequence, Sequence_, sizeof...(I_)>
                 >::type
             >
             BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
             explicit
             vector_data(each_elem, Sequence&& rhs)
-                : store<I, T>(forward_at_c<I>(std::forward<Sequence>(rhs)))...
+                : store<I_, T>(forward_at_c<I_>(std::forward<Sequence>(rhs)))...
             {}
 
             template <typename ...U>
             BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
             explicit
             vector_data(each_elem, U&&... var)
-                : store<I, T>(std::forward<U>(var))...
+                : store<I_, T>(std::forward<U>(var))...
             {}
 
             template <typename Sequence>
@@ -220,7 +220,7 @@ namespace boost { namespace fusion
             void
             assign_sequence(Sequence&& seq)
             {
-                assign(std::forward<Sequence>(seq), detail::index_sequence<I...>());
+                assign(std::forward<Sequence>(seq), detail::index_sequence<I_...>());
             }
 
             template <typename Sequence>

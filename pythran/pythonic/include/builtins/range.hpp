@@ -63,11 +63,11 @@ PYTHONIC_NS_END
 
 namespace std
 {
-  template <size_t I>
+  template <size_t I_>
   long get(pythonic::builtins::range const &);
 
-  template <size_t I>
-  struct tuple_element<I, pythonic::builtins::range> {
+  template <size_t I_>
+  struct tuple_element<I_, pythonic::builtins::range> {
     typedef long type;
   };
 }

@@ -24,11 +24,11 @@ namespace boost { namespace fusion
             typedef typename Cons::car_type type;
         };
 
-        template <typename Cons, int I>
+        template <typename Cons, int I_>
         struct cons_advance
         {
             typedef typename
-                cons_advance<Cons, I-1>::type::cdr_type
+                cons_advance<Cons, I_-1>::type::cdr_type
             type;
         };
 

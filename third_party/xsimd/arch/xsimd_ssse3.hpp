@@ -62,12 +62,12 @@ namespace xsimd
                 return other;
             }
 
-            template <class T, class A, std::size_t I, std::size_t... Is>
-            inline batch<T, A> extract_pair(batch<T, A> const& self, batch<T, A> const& other, std::size_t i, ::xsimd::detail::index_sequence<I, Is...>) noexcept
+            template <class T, class A, std::size_t I_, std::size_t... Is>
+            inline batch<T, A> extract_pair(batch<T, A> const& self, batch<T, A> const& other, std::size_t i, ::xsimd::detail::index_sequence<I_, Is...>) noexcept
             {
-                if (i == I)
+                if (i == I_)
                 {
-                    return _mm_alignr_epi8(self, other, sizeof(T) * I);
+                    return _mm_alignr_epi8(self, other, sizeof(T) * I_);
                 }
                 else
                     return extract_pair(self, other, i, ::xsimd::detail::index_sequence<Is...>());

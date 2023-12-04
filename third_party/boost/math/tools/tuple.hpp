@@ -50,10 +50,10 @@ struct tuple_size
    < ::std::size_t, ::boost::tuples::length<T>::value>
 {};
 
-template < int I, class T>
+template < int I_, class T>
 struct tuple_element
 {
-   typedef typename boost::tuples::element<I,T>::type type;
+   typedef typename boost::tuples::element<I_,T>::type type;
 };
 
 #if !BOOST_WORKAROUND(__BORLANDC__, < 0x0582)

@@ -134,28 +134,28 @@ namespace types
   inline void file::flush()
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     fflush(**data);
   }
 
   inline long file::fileno() const
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     return ::fileno(**data);
   }
 
   inline bool file::isatty() const
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     return ::isatty(this->fileno());
   }
 
   inline types::str file::read(long size)
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     if (mode.find_first_of("r+") == -1)
       throw IOError("File not open for reading");
     if (size == 0 || (feof(**data) && mode.find_first_of("ra") == -1))
@@ -175,7 +175,7 @@ namespace types
   inline types::str file::readline(long size)
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     if (mode.find_first_of("r+") == -1)
       throw IOError("File not open for reading");
     constexpr static long BUFFER_SIZE = 1024;
@@ -206,7 +206,7 @@ namespace types
   inline void file::seek(long offset, long whence)
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     if (whence != SEEK_SET && whence != SEEK_CUR && whence != SEEK_END)
       throw IOError("file.seek() :  Invalid argument.");
     fseek(**data, offset, whence);
@@ -215,14 +215,14 @@ namespace types
   inline long file::tell() const
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     return ftell(**data);
   }
 
   inline void file::truncate(long size)
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     if (mode.find_first_of("wa+") == -1)
       throw IOError("file.write() :  File not open for writing.");
     if (size < 0)
@@ -239,7 +239,7 @@ namespace types
   inline long file::write(types::str const &str)
   {
     if (!is_open)
-      throw ValueError("I/O operation on closed file");
+      throw ValueError("I_/O operation on closed file");
     if (mode.find_first_of("wa+") == -1)
       throw IOError("file.write() :  File not open for writing.");
     return fwrite(str.c_str(), sizeof(char), str.size(), **data);

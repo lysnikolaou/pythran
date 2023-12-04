@@ -434,7 +434,7 @@ namespace boost {
 } /* namespace boost */
 
 #ifndef BOOST_NO_CXX11_HDR_ARRAY
-//  If we don't have std::array, I'm assuming that we don't have std::get
+//  If we don't have std::array, I_'m assuming that we don't have std::get
 namespace std {
    template <size_t Idx, typename T, size_t N>
    T &get(boost::array<T,N> &arr) BOOST_NOEXCEPT {

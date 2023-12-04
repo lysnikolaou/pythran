@@ -729,10 +729,10 @@ namespace std
     return x.c;
   }
 
-  template <size_t I>
+  template <size_t I_>
   pythonic::types::str get(pythonic::types::str const &t)
   {
-    return pythonic::types::str(t[I]);
+    return pythonic::types::str(t[I_]);
   }
 } // namespace std
 #ifdef ENABLE_PYTHON_MODULE

@@ -171,11 +171,11 @@ namespace types
     }
 
     using shape_t = typename shape_builder<dynamic_tuple, value>::type;
-    template <size_t I>
+    template <size_t I_>
     auto shape() const
-        -> decltype(details::extract_shape(*this, utils::int_<I>{}))
+        -> decltype(details::extract_shape(*this, utils::int_<I_>{}))
     {
-      return details::extract_shape(*this, utils::int_<I>{});
+      return details::extract_shape(*this, utils::int_<I_>{});
     }
 
     template <class E, size_t N, class S>
@@ -208,29 +208,29 @@ PYTHONIC_NS_END
 namespace std
 {
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::dynamic_tuple<T>::const_reference
   get(pythonic::types::dynamic_tuple<T> const &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::dynamic_tuple<T>::reference
   get(pythonic::types::dynamic_tuple<T> &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::dynamic_tuple<T>::reference
   get(pythonic::types::dynamic_tuple<T> &&t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T>
-  struct tuple_element<I, pythonic::types::dynamic_tuple<T>> {
+  template <size_t I_, class T>
+  struct tuple_element<I_, pythonic::types::dynamic_tuple<T>> {
     using type = typename pythonic::types::dynamic_tuple<T>::value_type;
   };
 } // namespace std

@@ -18,7 +18,7 @@
 //             <boost/limits.hpp> instead (the workaround did not
 //             actually compile when BOOST_NO_LIMITS was defined in
 //             any case, so we loose nothing). (John Maddock)
-//  21 Jan 01  Undid a bug I introduced yesterday. numeric_cast<> never
+//  21 Jan 01  Undid a bug I_ introduced yesterday. numeric_cast<> never
 //             worked with stock GCC; trying to get it to do that broke
 //             vc-stlport.
 //  20 Jan 01  Moved BOOST_NO_LIMITS_COMPILE_TIME_CONSTANTS to config.hpp.
@@ -38,7 +38,7 @@
 //  26 Jan 00  Add missing throw() to bad_numeric_cast::what(0 (Adam Levar)
 //  29 Dec 99  Change using declarations so usages in other namespaces work
 //             correctly (Dave Abrahams)
-//  23 Sep 99  Change polymorphic_downcast assert to also detect M.I. errors
+//  23 Sep 99  Change polymorphic_downcast assert to also detect M.I_. errors
 //             as suggested Darin Adler and improved by Valentin Bonnard.
 //   2 Sep 99  Remove controversial asserts, simplify, rename.
 //  30 Aug 99  Move to cast.hpp, replace value_cast with numeric_cast,
@@ -198,8 +198,8 @@ namespace boost
     template <>
     struct greater_than_type_max<false, true>
     {
-        // What does the standard say about this? I think it's right, and it
-        // will work with every compiler I know of.
+        // What does the standard say about this? I_ think it's right, and it
+        // will work with every compiler I_ know of.
         template <class X, class Y>
         static inline bool check(X x, Y)
             { return x >= 0 && static_cast<X>(static_cast<Y>(x)) != x; }
@@ -216,8 +216,8 @@ namespace boost
     template <>
     struct greater_than_type_max<false, false>
     {
-        // What does the standard say about this? I think it's right, and it
-        // will work with every compiler I know of.
+        // What does the standard say about this? I_ think it's right, and it
+        // will work with every compiler I_ know of.
         template <class X, class Y>
         static inline bool check(X x, Y)
             { return static_cast<X>(static_cast<Y>(x)) != x; }

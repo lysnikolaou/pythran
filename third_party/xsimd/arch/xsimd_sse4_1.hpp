@@ -105,26 +105,26 @@ namespace xsimd
         }
 
         // insert
-        template <class A, class T, size_t I, class = typename std::enable_if<std::is_integral<T>::value, void>::type>
-        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I> pos, requires_arch<sse4_1>) noexcept
+        template <class A, class T, size_t I_, class = typename std::enable_if<std::is_integral<T>::value, void>::type>
+        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I_> pos, requires_arch<sse4_1>) noexcept
         {
             XSIMD_IF_CONSTEXPR(sizeof(T) == 1)
             {
-                return _mm_insert_epi8(self, val, I);
+                return _mm_insert_epi8(self, val, I_);
             }
             else XSIMD_IF_CONSTEXPR(sizeof(T) == 4)
             {
-                return _mm_insert_epi32(self, val, I);
+                return _mm_insert_epi32(self, val, I_);
             }
             else XSIMD_IF_CONSTEXPR(sizeof(T) == 8)
             {
 #if (!defined(_MSC_VER) && __x86_64__) || (_MSC_VER > 1900 && defined(_M_X64))
-                return _mm_insert_epi64(self, val, I);
+                return _mm_insert_epi64(self, val, I_);
 #else
                 uint32_t lo, hi;
                 memcpy(&lo, (reinterpret_cast<uint32_t*>(&val)), sizeof(lo));
                 memcpy(&hi, (reinterpret_cast<uint32_t*>(&val)) + 1, sizeof(hi));
-                return _mm_insert_epi32(_mm_insert_epi32(self, lo, 2 * I), hi, 2 * I + 1);
+                return _mm_insert_epi32(_mm_insert_epi32(self, lo, 2 * I_), hi, 2 * I_ + 1);
 #endif
             }
             else

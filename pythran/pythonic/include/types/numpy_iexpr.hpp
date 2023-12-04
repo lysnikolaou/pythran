@@ -269,15 +269,15 @@ namespace types
 
     explicit operator bool() const;
     long flat_size() const;
-    template <size_t I>
-    auto shape() const -> decltype(arg.template shape<I + 1>())
+    template <size_t I_>
+    auto shape() const -> decltype(arg.template shape<I_ + 1>())
     {
-      return arg.template shape<I + 1>();
+      return arg.template shape<I_ + 1>();
     }
-    template <size_t I>
-    auto strides() const -> decltype(arg.template strides<I + 1>())
+    template <size_t I_>
+    auto strides() const -> decltype(arg.template strides<I_ + 1>())
     {
-      return arg.template strides<I + 1>();
+      return arg.template strides<I_ + 1>();
     }
 
     template <class pS>

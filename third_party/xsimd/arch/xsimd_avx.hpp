@@ -26,8 +26,8 @@ namespace xsimd
         using namespace types;
 
         // fwd
-        template <class A, class T, size_t I>
-        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I>, requires_arch<generic>) noexcept;
+        template <class A, class T, size_t I_>
+        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I_>, requires_arch<generic>) noexcept;
 
         namespace detail
         {
@@ -764,21 +764,21 @@ namespace xsimd
         }
 
         // insert
-        template <class A, class T, size_t I, class = typename std::enable_if<std::is_integral<T>::value, void>::type>
-        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I> pos, requires_arch<avx>) noexcept
+        template <class A, class T, size_t I_, class = typename std::enable_if<std::is_integral<T>::value, void>::type>
+        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I_> pos, requires_arch<avx>) noexcept
         {
 #if !defined(_MSC_VER) || _MSC_VER > 1900
             XSIMD_IF_CONSTEXPR(sizeof(T) == 1)
             {
-                return _mm256_insert_epi8(self, val, I);
+                return _mm256_insert_epi8(self, val, I_);
             }
             else XSIMD_IF_CONSTEXPR(sizeof(T) == 2)
             {
-                return _mm256_insert_epi16(self, val, I);
+                return _mm256_insert_epi16(self, val, I_);
             }
             else XSIMD_IF_CONSTEXPR(sizeof(T) == 4)
             {
-                return _mm256_insert_epi32(self, val, I);
+                return _mm256_insert_epi32(self, val, I_);
             }
             else
             {

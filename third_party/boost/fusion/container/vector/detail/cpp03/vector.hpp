@@ -215,26 +215,26 @@ FUSION_HASH endif
             return vec.at_impl(index);
         }
 
-        template <typename I>
+        template <typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
         typename add_reference<
-            typename mpl::at<types, I>::type
+            typename mpl::at<types, I_>::type
         >::type
-        at_impl(I /*index*/)
+        at_impl(I_ /*index*/)
         {
-            return vec.at_impl(mpl::int_<I::value>());
+            return vec.at_impl(mpl::int_<I_::value>());
         }
 
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
         typename add_reference<
             typename add_const<
-                typename mpl::at<types, I>::type
+                typename mpl::at<types, I_>::type
             >::type
         >::type
-        at_impl(I /*index*/) const
+        at_impl(I_ /*index*/) const
         {
-            return vec.at_impl(mpl::int_<I::value>());
+            return vec.at_impl(mpl::int_<I_::value>());
         }
 
     private:

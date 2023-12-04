@@ -36,28 +36,28 @@ namespace numpy
          Axes const &axes = {}, Norm const &norm = {});
 
     // with shape
-    template <class T, class pS, class I, size_t N, class V,
+    template <class T, class pS, class I_, size_t N, class V,
               class Axes = types::none_type, class Norm = types::none_type>
     types::ndarray<typename std::enable_if<std::is_integral<T>::value,
                                            std::complex<double>>::type,
                    types::array<long, std::tuple_size<pS>::value>>
-    fftn(types::ndarray<T, pS> const &a, types::array_base<I, N, V> const &s,
+    fftn(types::ndarray<T, pS> const &a, types::array_base<I_, N, V> const &s,
          Axes const &axes = {}, Norm const &norm = {});
 
-    template <class T, class pS, class I, size_t N, class V,
+    template <class T, class pS, class I_, size_t N, class V,
               class Axes = types::none_type, class Norm = types::none_type>
     types::ndarray<typename std::enable_if<std::is_floating_point<T>::value,
                                            std::complex<T>>::type,
                    types::array<long, std::tuple_size<pS>::value>>
-    fftn(types::ndarray<T, pS> const &a, types::array_base<I, N, V> const &s,
+    fftn(types::ndarray<T, pS> const &a, types::array_base<I_, N, V> const &s,
          Axes const &axes = {}, Norm const &norm = {});
 
-    template <class T, class pS, class I, size_t N, class V,
+    template <class T, class pS, class I_, size_t N, class V,
               class Axes = types::none_type, class Norm = types::none_type>
     types::ndarray<
         typename std::enable_if<types::is_complex<T>::value, T>::type,
         types::array<long, std::tuple_size<pS>::value>>
-    fftn(types::ndarray<T, pS> const &a, types::array_base<I, N, V> const &s,
+    fftn(types::ndarray<T, pS> const &a, types::array_base<I_, N, V> const &s,
          Axes const &axes = {}, Norm const &norm = {});
 
     NUMPY_EXPR_TO_NDARRAY0_DECL(fftn);

@@ -175,7 +175,7 @@ struct resolve_bind_arg< bind<F,AUX778076_BIND_PARAMS(T)>,AUX778076_BIND_PARAMS(
 
 // agurt, 15/jan/02: it's not a intended to be used as a function class, and 
 // MSVC6.5 has problems with 'apply' name here (the code compiles, but doesn't
-// work), so I went with the 'result_' here, and in all other similar cases
+// work), so I_ went with the 'result_' here, and in all other similar cases
 template< bool >
 struct resolve_arg_impl
 {

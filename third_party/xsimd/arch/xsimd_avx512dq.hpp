@@ -95,12 +95,12 @@ namespace xsimd
             // The following folds over the vector once:
             // tmp1 = [a0..8, b0..8]
             // tmp2 = [a8..f, b8..f]
-#define XSIMD_AVX512_HADDP_STEP1(I, a, b)                                \
-    batch<float, avx512f> res##I;                                        \
+#define XSIMD_AVX512_HADDP_STEP1(I_, a, b)                                \
+    batch<float, avx512f> res##I_;                                        \
     {                                                                    \
         auto tmp1 = _mm512_shuffle_f32x4(a, b, _MM_SHUFFLE(1, 0, 1, 0)); \
         auto tmp2 = _mm512_shuffle_f32x4(a, b, _MM_SHUFFLE(3, 2, 3, 2)); \
-        res##I = _mm512_add_ps(tmp1, tmp2);                              \
+        res##I_ = _mm512_add_ps(tmp1, tmp2);                              \
     }
 
             XSIMD_AVX512_HADDP_STEP1(0, row[0], row[2]);
@@ -118,8 +118,8 @@ namespace xsimd
             // tmp1 = [a0..4,  a8..12,  b0..4,  b8..12] (same for tmp3)
             // tmp2 = [a5..8, a12..16, b5..8, b12..16]  (same for tmp4)
             // tmp5 = [r1[0], r1[2], r2[0], r2[2], r1[4], r1[6] ...
-#define XSIMD_AVX512_HADDP_STEP2(I, a, b, c, d)                               \
-    batch<float, avx2> halfx##I;                                              \
+#define XSIMD_AVX512_HADDP_STEP2(I_, a, b, c, d)                               \
+    batch<float, avx2> halfx##I_;                                              \
     {                                                                         \
         auto tmp1 = _mm512_shuffle_f32x4(a, b, _MM_SHUFFLE(2, 0, 2, 0));      \
         auto tmp2 = _mm512_shuffle_f32x4(a, b, _MM_SHUFFLE(3, 1, 3, 1));      \
@@ -136,7 +136,7 @@ namespace xsimd
                                                                               \
         auto resx3 = _mm512_add_ps(tmp5, tmp6);                               \
                                                                               \
-        halfx##I = _mm256_hadd_ps(_mm512_extractf32x8_ps(resx3, 0),           \
+        halfx##I_ = _mm256_hadd_ps(_mm512_extractf32x8_ps(resx3, 0),           \
                                   _mm512_extractf32x8_ps(resx3, 1));          \
     }
 

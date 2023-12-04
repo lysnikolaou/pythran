@@ -54,7 +54,7 @@ namespace detail {
 // There are also double-word versions, LDREXD and STREXD.
 // (Actually it looks like these are available from version 6k onwards.)
 // FIXME these are not yet used; should be mostly a matter of copy-and-paste.
-// I think you can supply an immediate offset to the address.
+// I_ think you can supply an immediate offset to the address.
 
 template< bool Signed >
 struct operations< 4u, Signed > :

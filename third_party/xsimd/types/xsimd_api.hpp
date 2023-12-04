@@ -1008,8 +1008,8 @@ namespace xsimd
      * @param pos index of the updated slot
      * @return copy of \c x with position \c pos set to \c val
      */
-    template <class T, class A, size_t I>
-    inline batch<T, A> insert(batch<T, A> const& x, T val, index<I> pos) noexcept
+    template <class T, class A, size_t I_>
+    inline batch<T, A> insert(batch<T, A> const& x, T val, index<I_> pos) noexcept
     {
         detail::static_check_supported_config<T, A>();
         return kernel::insert<A>(x, val, pos, A {});

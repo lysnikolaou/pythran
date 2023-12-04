@@ -12,8 +12,8 @@ namespace numpy
 
   namespace wrapper
   {
-    template <class I>
-    I asarray_chkfinite(I const &a);
+    template <class I_>
+    I_ asarray_chkfinite(I_ const &a);
   }
 
 #define NUMPY_NARY_FUNC_NAME asarray_chkfinite

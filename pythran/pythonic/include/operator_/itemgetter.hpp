@@ -27,8 +27,8 @@ namespace operator_
 
     itemgetter_tuple_return();
 
-    template <class T, class A, size_t I>
-    void helper(T &t, A const &a, utils::int_<I>) const;
+    template <class T, class A, size_t I_>
+    void helper(T &t, A const &a, utils::int_<I_>) const;
 
     template <class T, class A>
     void helper(T &t, A const &a, utils::int_<0>) const;

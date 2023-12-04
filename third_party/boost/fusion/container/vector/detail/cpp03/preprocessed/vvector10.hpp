@@ -298,25 +298,25 @@ namespace boost { namespace fusion
         {
             return vec.at_impl(index);
         }
-        template <typename I>
+        template <typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
         typename add_reference<
-            typename mpl::at<types, I>::type
+            typename mpl::at<types, I_>::type
         >::type
-        at_impl(I )
+        at_impl(I_ )
         {
-            return vec.at_impl(mpl::int_<I::value>());
+            return vec.at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
         typename add_reference<
             typename add_const<
-                typename mpl::at<types, I>::type
+                typename mpl::at<types, I_>::type
             >::type
         >::type
-        at_impl(I ) const
+        at_impl(I_ ) const
         {
-            return vec.at_impl(mpl::int_<I::value>());
+            return vec.at_impl(mpl::int_<I_::value>());
         }
     private:
         BOOST_FUSION_VECTOR_CTOR_HELPER()

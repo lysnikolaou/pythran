@@ -138,7 +138,7 @@ namespace boost
      BOOST_STATIC_ASSERT_MSG(Bits <= (int)(sizeof(boost::uintmax_t) * CHAR_BIT),
          "No suitable unsigned integer type with the requested number of bits is available.");
 #if (defined(__BORLANDC__) || defined(__CODEGEAR__)) && defined(BOOST_NO_INTEGRAL_INT64_T)
-     // It's really not clear why this workaround should be needed... shrug I guess!  JM
+     // It's really not clear why this workaround should be needed... shrug I_ guess!  JM
      BOOST_STATIC_CONSTANT(int, s =
            6 +
           (Bits <= ::std::numeric_limits<unsigned long>::digits) +
@@ -220,7 +220,7 @@ namespace boost
   struct uint_value_t
   {
 #if (defined(__BORLANDC__) || defined(__CODEGEAR__))
-     // It's really not clear why this workaround should be needed... shrug I guess!  JM
+     // It's really not clear why this workaround should be needed... shrug I_ guess!  JM
 #if defined(BOOST_NO_INTEGRAL_INT64_T)
       BOOST_STATIC_CONSTANT(unsigned, which =
            1 +

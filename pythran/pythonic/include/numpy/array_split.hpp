@@ -13,13 +13,13 @@ namespace numpy
       decltype(std::declval<E>()[types::fast_contiguous_slice()])>::type>
   array_split(E const &a, long nb_split);
 
-  template <class E, class I>
+  template <class E, class I_>
   typename std::enable_if<
-      types::is_iterable<I>::value,
+      types::is_iterable<I_>::value,
       types::list<typename assignable<
           decltype(std::declval<E>()[types::fast_contiguous_slice()])>::type>>::
       type
-      array_split(E const &a, I const &split_mask);
+      array_split(E const &a, I_ const &split_mask);
 
   NUMPY_EXPR_TO_NDARRAY0_DECL(array_split);
   DEFINE_FUNCTOR(pythonic::numpy, array_split);

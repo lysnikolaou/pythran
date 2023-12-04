@@ -41,7 +41,7 @@
 #if defined(__INTEL_COMPILER)
 // This is used to suppress warning #32013 described below for Intel Compiler.
 // In debug builds the compiler does not inline any functions, so basically
-// every atomic function call results in this warning. I don't know any other
+// every atomic function call results in this warning. I_ don't know any other
 // way to selectively disable just this one warning.
 #pragma system_header
 #endif

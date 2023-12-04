@@ -325,7 +325,7 @@
 #  define BOOST_NO_VOID_RETURNS
 #endif
 
-// Borland did not implement value-initialization completely, as I reported
+// Borland did not implement value-initialization completely, as I_ reported
 // in 2007, Borland Report 51854, "Value-initialization: POD struct should be
 // zero-initialized", http://qc.embarcadero.com/wc/qcmain.aspx?d=51854
 // See also: http://www.boost.org/libs/utility/value_init.htm#compiler_issues

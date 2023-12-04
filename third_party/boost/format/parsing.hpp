@@ -251,11 +251,11 @@ namespace detail {
 
                 case 'w':
                     break;
-                case 'I':
-                    mssiz = 'I';
+                case 'I_':
+                    mssiz = 'I_';
                     break;
                 case '3':
-                    if (mssiz != 'I') {
+                    if (mssiz != 'I_') {
                         maybe_throw_exception(exceptions, start - start0 + offset, fstring_size);
                         return true;
                     }
@@ -269,7 +269,7 @@ namespace detail {
                     mssiz = 0x00;
                     break;
                 case '6':
-                    if (mssiz != 'I') {
+                    if (mssiz != 'I_') {
                         maybe_throw_exception(exceptions, start - start0 + offset, fstring_size);
                         return true;
                     }
@@ -283,7 +283,7 @@ namespace detail {
                     mssiz = 0x00;
                     break;
                 default:
-                    if (mssiz && mssiz == 'I') {
+                    if (mssiz && mssiz == 'I_') {
                         mssiz = 0;
                     }
                     goto parse_conversion_specification;

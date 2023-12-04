@@ -15,8 +15,8 @@ namespace numpy
 
   namespace wrapper
   {
-    template <class I>
-    I nan_to_num(I const &a);
+    template <class I_>
+    I_ nan_to_num(I_ const &a);
   }
 
 #define NUMPY_NARY_FUNC_NAME nan_to_num

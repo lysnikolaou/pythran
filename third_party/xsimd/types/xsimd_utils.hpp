@@ -35,8 +35,8 @@ namespace xsimd
      * index      *
      **************/
 
-    template <size_t I>
-    using index = std::integral_constant<size_t, I>;
+    template <size_t I_>
+    using index = std::integral_constant<size_t, I_>;
 
     /**************
      * as_integer *
@@ -338,16 +338,16 @@ namespace xsimd
 
     namespace detail
     {
-        template <class T, class... Types, size_t I, size_t... Is>
-        inline const T& get_impl(const std::tuple<Types...>& t, std::is_same<T, T>, index_sequence<I, Is...>) noexcept
+        template <class T, class... Types, size_t I_, size_t... Is>
+        inline const T& get_impl(const std::tuple<Types...>& t, std::is_same<T, T>, index_sequence<I_, Is...>) noexcept
         {
-            return std::get<I>(t);
+            return std::get<I_>(t);
         }
 
-        template <class T, class U, class... Types, size_t I, size_t... Is>
-        inline const T& get_impl(const std::tuple<Types...>& t, std::is_same<T, U>, index_sequence<I, Is...>) noexcept
+        template <class T, class U, class... Types, size_t I_, size_t... Is>
+        inline const T& get_impl(const std::tuple<Types...>& t, std::is_same<T, U>, index_sequence<I_, Is...>) noexcept
         {
-            using tuple_elem = typename std::tuple_element<I + 1, std::tuple<Types...>>::type;
+            using tuple_elem = typename std::tuple_element<I_ + 1, std::tuple<Types...>>::type;
             return get_impl<T>(t, std::is_same<T, tuple_elem>(), index_sequence<Is...>());
         }
 

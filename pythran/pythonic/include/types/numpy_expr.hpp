@@ -8,12 +8,12 @@ PYTHONIC_NS_BEGIN
 
 namespace types
 {
-  template <size_t I, class Args>
+  template <size_t I_, class Args>
   bool is_trivial_broadcast()
   {
     return std::is_same<typename std::tuple_element<
                             0, typename std::decay<typename std::tuple_element<
-                                   I, Args>::type>::type::shape_t>::type,
+                                   I_, Args>::type>::type::shape_t>::type,
                         std::integral_constant<long, 1>>::value;
   }
 
@@ -66,11 +66,11 @@ namespace types
 
   template <class Op>
   struct Dereferencer {
-    template <class Ts, size_t... I>
-    auto operator()(Ts const &iters, utils::index_sequence<I...>)
-        -> decltype(Op{}(*std::get<I>(iters)...))
+    template <class Ts, size_t... I_>
+    auto operator()(Ts const &iters, utils::index_sequence<I_...>)
+        -> decltype(Op{}(*std::get<I_>(iters)...))
     {
-      return Op{}(*std::get<I>(iters)...);
+      return Op{}(*std::get<I_>(iters)...);
     }
   };
   template <class T>
@@ -79,7 +79,7 @@ namespace types
   };
   namespace details
   {
-    template <size_t I, class Args, size_t... Is>
+    template <size_t I_, class Args, size_t... Is>
     long init_shape_element(Args const &args, utils::index_sequence<Is...>);
   }
 
@@ -107,8 +107,8 @@ namespace types
       return *this;
     }
 
-    template <size_t... I>
-    auto _dereference(utils::index_sequence<I...> s) const
+    template <size_t... I_>
+    auto _dereference(utils::index_sequence<I_...> s) const
         -> decltype(Dereferencer<Op>{}(iters_, s))
     {
       return Dereferencer<Op>{}(iters_, s);
@@ -120,30 +120,30 @@ namespace types
       return _dereference(utils::make_index_sequence<sizeof...(Iters)>{});
     }
 
-    template <size_t I>
+    template <size_t I_>
     bool _incr_opt(std::integral_constant<bool, true> long_step)
     {
       if (is_perfect_stepping<Steps>::value)
-        ++std::get<I>(iters_);
+        ++std::get<I_>(iters_);
       else
-        std::get<I>(iters_) += std::get<I>(steps_);
+        std::get<I_>(iters_) += std::get<I_>(steps_);
       return true;
     }
 
-    template <size_t I>
+    template <size_t I_>
     bool _incr_opt(std::integral_constant<bool, false> long_step)
     {
-      if (std::tuple_element<I, Steps>::type::value)
-        ++std::get<I>(iters_);
+      if (std::tuple_element<I_, Steps>::type::value)
+        ++std::get<I_>(iters_);
       return true;
     }
 
-    template <size_t... I>
-    void _incr(utils::index_sequence<I...>)
+    template <size_t... I_>
+    void _incr(utils::index_sequence<I_...>)
     {
-      (void)std::initializer_list<bool>{_incr_opt<I>(std::integral_constant<
+      (void)std::initializer_list<bool>{_incr_opt<I_>(std::integral_constant<
           bool, std::is_same<long, typename std::tuple_element<
-                                       I, Steps>::type>::value>{})...};
+                                       I_, Steps>::type>::value>{})...};
     }
     numpy_expr_iterator &operator++()
     {
@@ -157,11 +157,11 @@ namespace types
       return other += i;
     }
 
-    template <size_t... I>
-    void _update(long i, utils::index_sequence<I...>)
+    template <size_t... I_>
+    void _update(long i, utils::index_sequence<I_...>)
     {
       (void)std::initializer_list<bool>{
-          (std::get<I>(iters_) += std::get<I>(steps_) * i, true)...};
+          (std::get<I_>(iters_) += std::get<I_>(steps_) * i, true)...};
     }
     numpy_expr_iterator &operator+=(long i)
     {
@@ -169,12 +169,12 @@ namespace types
       return *this;
     }
 
-    template <size_t... I>
+    template <size_t... I_>
     long _difference(numpy_expr_iterator const &other,
-                     utils::index_sequence<I...>) const
+                     utils::index_sequence<I_...>) const
     {
       std::initializer_list<long> distances{(static_cast<long>(
-          std::get<I>(iters_) - std::get<I>(other.iters_)))...};
+          std::get<I_>(iters_) - std::get<I_>(other.iters_)))...};
       return *std::max_element(distances.begin(), distances.end());
     }
 
@@ -188,12 +188,12 @@ namespace types
       return false;
     }
 
-    template <size_t I>
-    bool _neq(numpy_expr_iterator const &other, utils::int_<I>) const
+    template <size_t I_>
+    bool _neq(numpy_expr_iterator const &other, utils::int_<I_>) const
     {
-      return (std::get<I - 1>(steps_) &&
-              (std::get<I - 1>(iters_) != std::get<I - 1>(other.iters_))) ||
-             _neq(other, utils::int_<I - 1>{});
+      return (std::get<I_ - 1>(steps_) &&
+              (std::get<I_ - 1>(iters_) != std::get<I_ - 1>(other.iters_))) ||
+             _neq(other, utils::int_<I_ - 1>{});
     }
 
     bool operator!=(numpy_expr_iterator const &other) const
@@ -205,12 +205,12 @@ namespace types
       return true;
     }
 
-    template <size_t I>
-    bool _eq(numpy_expr_iterator const &other, utils::int_<I>) const
+    template <size_t I_>
+    bool _eq(numpy_expr_iterator const &other, utils::int_<I_>) const
     {
-      return (!std::get<I - 1>(steps_) ||
-              (std::get<I - 1>(iters_) == std::get<I - 1>(other.iters_))) &&
-             _eq(other, utils::int_<I - 1>{});
+      return (!std::get<I_ - 1>(steps_) ||
+              (std::get<I_ - 1>(iters_) == std::get<I_ - 1>(other.iters_))) &&
+             _eq(other, utils::int_<I_ - 1>{});
     }
 
     bool operator==(numpy_expr_iterator const &other) const
@@ -223,15 +223,15 @@ namespace types
       return false;
     }
 
-    template <size_t I>
-    bool _lt(numpy_expr_iterator const &other, utils::int_<I>) const
+    template <size_t I_>
+    bool _lt(numpy_expr_iterator const &other, utils::int_<I_>) const
     {
-      if (!std::get<I - 1>(steps_) ||
-          (std::get<I - 1>(iters_) == std::get<I - 1>(other.iters_)))
-        return _lt(other, utils::int_<I - 1>{});
+      if (!std::get<I_ - 1>(steps_) ||
+          (std::get<I_ - 1>(iters_) == std::get<I_ - 1>(other.iters_)))
+        return _lt(other, utils::int_<I_ - 1>{});
       else
-        return std::get<I - 1>(steps_) &&
-               (std::get<I - 1>(iters_) < std::get<I - 1>(other.iters_));
+        return std::get<I_ - 1>(steps_) &&
+               (std::get<I_ - 1>(iters_) < std::get<I_ - 1>(other.iters_));
     }
 
     bool operator<(numpy_expr_iterator const &other) const
@@ -267,12 +267,12 @@ namespace types
       return *this;
     }
 
-    template <size_t... I>
-    auto _dereference(utils::index_sequence<I...>) const
-        -> decltype(Op{}(*std::get<I>(iters_)...))
+    template <size_t... I_>
+    auto _dereference(utils::index_sequence<I_...>) const
+        -> decltype(Op{}(*std::get<I_>(iters_)...))
     {
-      return Op{}(((std::get<I>(steps_)) ? (*std::get<I>(iters_))
-                                         : (std::get<I>(siters_)))...);
+      return Op{}(((std::get<I_>(steps_)) ? (*std::get<I_>(iters_))
+                                         : (std::get<I_>(siters_)))...);
     }
 
     auto operator*() const -> decltype(
@@ -281,30 +281,30 @@ namespace types
       return _dereference(utils::make_index_sequence<sizeof...(Iters)>{});
     }
 
-    template <size_t I>
+    template <size_t I_>
     bool _incr_opt(std::integral_constant<bool, true> long_step)
     {
       if (is_perfect_stepping<Steps>::value)
-        ++std::get<I>(iters_);
+        ++std::get<I_>(iters_);
       else
-        std::get<I>(iters_) += std::get<I>(steps_);
+        std::get<I_>(iters_) += std::get<I_>(steps_);
       return true;
     }
 
-    template <size_t I>
+    template <size_t I_>
     bool _incr_opt(std::integral_constant<bool, false> long_step)
     {
-      if (std::tuple_element<I, Steps>::type::value)
-        ++std::get<I>(iters_);
+      if (std::tuple_element<I_, Steps>::type::value)
+        ++std::get<I_>(iters_);
       return true;
     }
 
-    template <size_t... I>
-    void _incr(utils::index_sequence<I...>)
+    template <size_t... I_>
+    void _incr(utils::index_sequence<I_...>)
     {
-      (void)std::initializer_list<bool>{_incr_opt<I>(std::integral_constant<
+      (void)std::initializer_list<bool>{_incr_opt<I_>(std::integral_constant<
           bool, std::is_same<long, typename std::tuple_element<
-                                       I, Steps>::type>::value>{})...};
+                                       I_, Steps>::type>::value>{})...};
     }
     numpy_expr_simd_iterator &operator++()
     {
@@ -318,11 +318,11 @@ namespace types
       return other += i;
     }
 
-    template <size_t... I>
-    void _update(long i, utils::index_sequence<I...>)
+    template <size_t... I_>
+    void _update(long i, utils::index_sequence<I_...>)
     {
       (void)std::initializer_list<bool>{
-          (std::get<I>(iters_) += std::get<I>(steps_) * i, true)...};
+          (std::get<I_>(iters_) += std::get<I_>(steps_) * i, true)...};
     }
     numpy_expr_simd_iterator &operator+=(long i)
     {
@@ -330,12 +330,12 @@ namespace types
       return *this;
     }
 
-    template <size_t... I>
+    template <size_t... I_>
     long _difference(numpy_expr_simd_iterator const &other,
-                     utils::index_sequence<I...>) const
+                     utils::index_sequence<I_...>) const
     {
       std::initializer_list<long> distances{
-          (std::get<I>(iters_) - std::get<I>(other.iters_))...};
+          (std::get<I_>(iters_) - std::get<I_>(other.iters_))...};
       return *std::max_element(distances.begin(), distances.end());
     }
 
@@ -349,12 +349,12 @@ namespace types
       return false;
     }
 
-    template <size_t I>
-    bool _neq(numpy_expr_simd_iterator const &other, utils::int_<I>) const
+    template <size_t I_>
+    bool _neq(numpy_expr_simd_iterator const &other, utils::int_<I_>) const
     {
-      return (std::get<I - 1>(steps_) &&
-              (std::get<I - 1>(iters_) != std::get<I - 1>(other.iters_))) ||
-             _neq(other, utils::int_<I - 1>{});
+      return (std::get<I_ - 1>(steps_) &&
+              (std::get<I_ - 1>(iters_) != std::get<I_ - 1>(other.iters_))) ||
+             _neq(other, utils::int_<I_ - 1>{});
     }
 
     bool operator!=(numpy_expr_simd_iterator const &other) const
@@ -367,12 +367,12 @@ namespace types
       return true;
     }
 
-    template <size_t I>
-    bool _eq(numpy_expr_simd_iterator const &other, utils::int_<I>) const
+    template <size_t I_>
+    bool _eq(numpy_expr_simd_iterator const &other, utils::int_<I_>) const
     {
-      return (std::get<I - 1>(steps_) &&
-              (std::get<I - 1>(iters_) == std::get<I - 1>(other.iters_))) &&
-             _eq(other, utils::int_<I - 1>{});
+      return (std::get<I_ - 1>(steps_) &&
+              (std::get<I_ - 1>(iters_) == std::get<I_ - 1>(other.iters_))) &&
+             _eq(other, utils::int_<I_ - 1>{});
     }
 
     bool operator==(numpy_expr_simd_iterator const &other) const
@@ -385,15 +385,15 @@ namespace types
       return false;
     }
 
-    template <size_t I>
-    bool _lt(numpy_expr_simd_iterator const &other, utils::int_<I>) const
+    template <size_t I_>
+    bool _lt(numpy_expr_simd_iterator const &other, utils::int_<I_>) const
     {
-      if (std::get<I - 1>(steps_) &&
-          (std::get<I - 1>(iters_) == std::get<I - 1>(other.iters_)))
-        return _lt(other, utils::int_<I - 1>{});
+      if (std::get<I_ - 1>(steps_) &&
+          (std::get<I_ - 1>(iters_) == std::get<I_ - 1>(other.iters_)))
+        return _lt(other, utils::int_<I_ - 1>{});
       else
-        return std::get<I - 1>(steps_) &&
-               (std::get<I - 1>(iters_) < std::get<I - 1>(other.iters_));
+        return std::get<I_ - 1>(steps_) &&
+               (std::get<I_ - 1>(iters_) < std::get<I_ - 1>(other.iters_));
     }
 
     bool operator<(numpy_expr_simd_iterator const &other) const
@@ -426,11 +426,11 @@ namespace types
       return *this;
     }
 
-    template <size_t... I>
-    auto _dereference(utils::index_sequence<I...>) const
-        -> decltype(Op{}(*std::get<I>(iters_)...))
+    template <size_t... I_>
+    auto _dereference(utils::index_sequence<I_...>) const
+        -> decltype(Op{}(*std::get<I_>(iters_)...))
     {
-      return Op{}((*std::get<I>(iters_))...);
+      return Op{}((*std::get<I_>(iters_))...);
     }
 
     auto operator*() const -> decltype(
@@ -439,10 +439,10 @@ namespace types
       return _dereference(utils::make_index_sequence<sizeof...(Iters)>{});
     }
 
-    template <size_t... I>
-    void _incr(utils::index_sequence<I...>)
+    template <size_t... I_>
+    void _incr(utils::index_sequence<I_...>)
     {
-      (void)std::initializer_list<bool>{(++std::get<I>(iters_), true)...};
+      (void)std::initializer_list<bool>{(++std::get<I_>(iters_), true)...};
     }
     numpy_expr_simd_iterator_nobroadcast &operator++()
     {
@@ -450,12 +450,12 @@ namespace types
       return *this;
     }
 
-    template <size_t... I>
+    template <size_t... I_>
     long _difference(numpy_expr_simd_iterator_nobroadcast const &other,
-                     utils::index_sequence<I...>) const
+                     utils::index_sequence<I_...>) const
     {
       std::initializer_list<long> distances{
-          (std::get<I>(iters_) - std::get<I>(other.iters_))...};
+          (std::get<I_>(iters_) - std::get<I_>(other.iters_))...};
       return *std::max_element(distances.begin(), distances.end());
     }
 
@@ -470,10 +470,10 @@ namespace types
       return other += i;
     }
 
-    template <size_t... I>
-    void _update(long i, utils::index_sequence<I...>)
+    template <size_t... I_>
+    void _update(long i, utils::index_sequence<I_...>)
     {
-      (void)std::initializer_list<bool>{(std::get<I>(iters_) += i, true)...};
+      (void)std::initializer_list<bool>{(std::get<I_>(iters_) += i, true)...};
     }
     numpy_expr_simd_iterator_nobroadcast &operator+=(long i)
     {
@@ -487,12 +487,12 @@ namespace types
       return false;
     }
 
-    template <size_t I>
+    template <size_t I_>
     bool _neq(numpy_expr_simd_iterator_nobroadcast const &other,
-              utils::int_<I>) const
+              utils::int_<I_>) const
     {
-      return (std::get<I - 1>(iters_) != std::get<I - 1>(other.iters_)) ||
-             _neq(other, utils::int_<I - 1>{});
+      return (std::get<I_ - 1>(iters_) != std::get<I_ - 1>(other.iters_)) ||
+             _neq(other, utils::int_<I_ - 1>{});
     }
 
     bool operator!=(numpy_expr_simd_iterator_nobroadcast const &other) const
@@ -506,12 +506,12 @@ namespace types
       return true;
     }
 
-    template <size_t I>
+    template <size_t I_>
     bool _eq(numpy_expr_simd_iterator_nobroadcast const &other,
-             utils::int_<I>) const
+             utils::int_<I_>) const
     {
-      return (std::get<I - 1>(iters_) == std::get<I - 1>(other.iters_)) &&
-             _eq(other, utils::int_<I - 1>{});
+      return (std::get<I_ - 1>(iters_) == std::get<I_ - 1>(other.iters_)) &&
+             _eq(other, utils::int_<I_ - 1>{});
     }
 
     bool operator==(numpy_expr_simd_iterator_nobroadcast const &other) const
@@ -525,14 +525,14 @@ namespace types
       return false;
     }
 
-    template <size_t I>
+    template <size_t I_>
     bool _lt(numpy_expr_simd_iterator_nobroadcast const &other,
-             utils::int_<I>) const
+             utils::int_<I_>) const
     {
-      if (std::get<I - 1>(iters_) == std::get<I - 1>(other.iters_))
-        return _lt(other, utils::int_<I - 1>{});
+      if (std::get<I_ - 1>(iters_) == std::get<I_ - 1>(other.iters_))
+        return _lt(other, utils::int_<I_ - 1>{});
       else
-        return std::get<I - 1>(iters_) < std::get<I - 1>(other.iters_);
+        return std::get<I_ - 1>(iters_) < std::get<I_ - 1>(other.iters_);
     }
 
     bool operator<(numpy_expr_simd_iterator_nobroadcast const &other) const
@@ -555,16 +555,16 @@ namespace types
   }
 
   template <class S>
-  constexpr size_t count_none(size_t I)
+  constexpr size_t count_none(size_t I_)
   {
-    return I == 0 ? 0 : std::is_same<S, none_type>::value;
+    return I_ == 0 ? 0 : std::is_same<S, none_type>::value;
   }
 
   template <class S, class Sp, class... Ss>
-  constexpr size_t count_none(size_t I)
+  constexpr size_t count_none(size_t I_)
   {
-    return I == 0 ? 0 : (std::is_same<S, none_type>::value +
-                         count_none<Sp, Ss...>(I - 1));
+    return I_ == 0 ? 0 : (std::is_same<S, none_type>::value +
+                         count_none<Sp, Ss...>(I_ - 1));
   }
 
   template <class BT, class T>
@@ -647,41 +647,41 @@ namespace types
 
     numpy_expr(Args const &... args);
 
-    template <size_t... I>
-    const_iterator _begin(utils::index_sequence<I...>) const;
+    template <size_t... I_>
+    const_iterator _begin(utils::index_sequence<I_...>) const;
     const_iterator begin() const;
 
-    template <size_t... I>
-    const_iterator _end(utils::index_sequence<I...>) const;
+    template <size_t... I_>
+    const_iterator _end(utils::index_sequence<I_...>) const;
     const_iterator end() const;
 
     const_fast_iterator begin(types::fast) const;
     const_fast_iterator end(types::fast) const;
 
-    template <size_t... I>
-    iterator _begin(utils::index_sequence<I...>);
+    template <size_t... I_>
+    iterator _begin(utils::index_sequence<I_...>);
     iterator begin();
 
-    template <size_t... I>
-    iterator _end(utils::index_sequence<I...>);
+    template <size_t... I_>
+    iterator _end(utils::index_sequence<I_...>);
     iterator end();
 
-    template <size_t... I>
-    auto _fast(long i, utils::index_sequence<I...>) const
-        -> decltype(Op()(std::get<I>(args).fast(i)...))
+    template <size_t... I_>
+    auto _fast(long i, utils::index_sequence<I_...>) const
+        -> decltype(Op()(std::get<I_>(args).fast(i)...))
     {
-      return Op()(std::get<I>(args).fast(i)...);
+      return Op()(std::get<I_>(args).fast(i)...);
     }
 
     auto fast(long i) const
         -> decltype(this->_fast(i,
                                 utils::make_index_sequence<sizeof...(Args)>{}));
 
-    template <class... Indices, size_t... I>
-    auto _load(utils::index_sequence<I...>, Indices... indices) const
-        -> decltype(Op()(std::get<I>(args).load(indices...)...))
+    template <class... Indices, size_t... I_>
+    auto _load(utils::index_sequence<I_...>, Indices... indices) const
+        -> decltype(Op()(std::get<I_>(args).load(indices...)...))
     {
-      return Op()(std::get<I>(args).load(indices...)...);
+      return Op()(std::get<I_>(args).load(indices...)...);
     }
 
     template <class... Indices>
@@ -693,12 +693,12 @@ namespace types
                          indices...);
     }
 
-    template <size_t... I>
-    auto _map_fast(array<long, sizeof...(I)> const &indices,
-                   utils::index_sequence<I...>) const
-        -> decltype(Op()(std::get<I>(args).fast(std::get<I>(indices))...))
+    template <size_t... I_>
+    auto _map_fast(array<long, sizeof...(I_)> const &indices,
+                   utils::index_sequence<I_...>) const
+        -> decltype(Op()(std::get<I_>(args).fast(std::get<I_>(indices))...))
     {
-      return Op()(std::get<I>(args).fast(std::get<I>(indices))...);
+      return Op()(std::get<I_>(args).fast(std::get<I_>(indices))...);
     }
 
     template <class... Indices>
@@ -707,21 +707,21 @@ namespace types
                         utils::make_index_sequence<sizeof...(Args)>{}));
 
   public:
-    template <size_t I>
-    auto shape() const -> decltype(details::init_shape_element<I>(
+    template <size_t I_>
+    auto shape() const -> decltype(details::init_shape_element<I_>(
         args, valid_indices<value, std::tuple<Args...>>{}))
     {
-      return details::init_shape_element<I>(
+      return details::init_shape_element<I_>(
           args, valid_indices<value, std::tuple<Args...>>{});
     }
-    template <size_t... I>
-    bool _no_broadcast(utils::index_sequence<I...>) const;
+    template <size_t... I_>
+    bool _no_broadcast(utils::index_sequence<I_...>) const;
     bool no_broadcast() const;
-    template <size_t... I>
-    bool _no_broadcast_vectorize(utils::index_sequence<I...>) const;
+    template <size_t... I_>
+    bool _no_broadcast_vectorize(utils::index_sequence<I_...>) const;
     bool no_broadcast_vectorize() const;
-    template <size_t... I>
-    bool _no_broadcast_ex(utils::index_sequence<I...>) const;
+    template <size_t... I_>
+    bool _no_broadcast_ex(utils::index_sequence<I_...>) const;
     bool no_broadcast_ex() const;
 
 #ifdef USE_XSIMD
@@ -735,31 +735,31 @@ namespace types
     using simd_iterator_nobroadcast = numpy_expr_simd_iterator_nobroadcast<
         numpy_expr, Op, typename std::remove_reference<
                             Args>::type::simd_iterator_nobroadcast...>;
-    template <size_t... I>
-    simd_iterator _vbegin(types::vectorize, utils::index_sequence<I...>) const;
+    template <size_t... I_>
+    simd_iterator _vbegin(types::vectorize, utils::index_sequence<I_...>) const;
     simd_iterator vbegin(types::vectorize) const;
-    template <size_t... I>
-    simd_iterator _vend(types::vectorize, utils::index_sequence<I...>) const;
+    template <size_t... I_>
+    simd_iterator _vend(types::vectorize, utils::index_sequence<I_...>) const;
     simd_iterator vend(types::vectorize) const;
 
-    template <size_t... I>
+    template <size_t... I_>
     simd_iterator_nobroadcast _vbegin(types::vectorize_nobroadcast,
-                                      utils::index_sequence<I...>) const;
+                                      utils::index_sequence<I_...>) const;
     simd_iterator_nobroadcast vbegin(types::vectorize_nobroadcast) const;
-    template <size_t... I>
+    template <size_t... I_>
     simd_iterator_nobroadcast _vend(types::vectorize_nobroadcast,
-                                    utils::index_sequence<I...>) const;
+                                    utils::index_sequence<I_...>) const;
     simd_iterator_nobroadcast vend(types::vectorize_nobroadcast) const;
 
 #endif
 
-    template <size_t... I, class... S>
-    auto _get(utils::index_sequence<I...> is, S const &... s) const -> decltype(
+    template <size_t... I_, class... S>
+    auto _get(utils::index_sequence<I_...> is, S const &... s) const -> decltype(
         Op{}(make_subslice(utils::make_index_sequence<sizeof...(S)>{},
-                           std::get<I>(args), *this, std::make_tuple(s...))...))
+                           std::get<I_>(args), *this, std::make_tuple(s...))...))
     {
       return Op{}(make_subslice(utils::make_index_sequence<sizeof...(S)>{},
-                                std::get<I>(args), *this,
+                                std::get<I_>(args), *this,
                                 std::make_tuple(s...))...);
     }
 
@@ -803,11 +803,11 @@ namespace types
     // FIXME: this does not take into account bounds and broadcasting
     auto operator[](long i) const -> decltype(this->fast(i));
 
-    template <size_t... I, class S>
-    auto _index(S s, utils::index_sequence<I...>) const
-        -> decltype(Op{}(std::get<I>(args)[s]...))
+    template <size_t... I_, class S>
+    auto _index(S s, utils::index_sequence<I_...>) const
+        -> decltype(Op{}(std::get<I_>(args)[s]...))
     {
-      return Op{}(std::get<I>(args)[s]...);
+      return Op{}(std::get<I_>(args)[s]...);
     }
     template <class S>
     auto operator[](S s) const

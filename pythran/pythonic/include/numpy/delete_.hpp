@@ -13,10 +13,10 @@ namespace numpy
   delete_(types::ndarray<T, pS> const &a, long index,
           types::none_type axis = builtins::None);
 
-  template <class T, class pS, class I>
-  typename std::enable_if<!std::is_scalar<I>::value,
+  template <class T, class pS, class I_>
+  typename std::enable_if<!std::is_scalar<I_>::value,
                           types::ndarray<T, types::pshape<long>>>::type
-  delete_(types::ndarray<T, pS> const &in, I const &indices,
+  delete_(types::ndarray<T, pS> const &in, I_ const &indices,
           types::none_type axis = builtins::None);
 
   NUMPY_EXPR_TO_NDARRAY0_DECL(delete_);

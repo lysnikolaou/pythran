@@ -74,7 +74,7 @@ namespace detail {
     except r0; this is sometimes required because the encoding for
     r0 is used to signify "constant zero" in a number of instructions,
     making r0 unusable in this place. For simplicity this constraint
-    is used everywhere since I am to lazy to look this up on a
+    is used everywhere since I_ am to lazy to look this up on a
     per-instruction basis, and ppc has enough registers for this not
     to pose a problem.
 */

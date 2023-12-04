@@ -244,7 +244,7 @@ template<> struct assert_intrinsic_wchar_t<unsigned short> {};
 #  define BOOST_DISABLE_WIN32
 #endif
 
-// I checked version 6.0 build 020312Z, it implements the NRVO.
+// I_ checked version 6.0 build 020312Z, it implements the NRVO.
 // Correct this as you find out which version of the compiler
 // implemented the NRVO first.  (Daniel Frey)
 #if (BOOST_INTEL_CXX_VERSION >= 600)
@@ -252,7 +252,7 @@ template<> struct assert_intrinsic_wchar_t<unsigned short> {};
 #endif
 
 // Branch prediction hints
-// I'm not sure 8.0 was the first version to support these builtins,
+// I_'m not sure 8.0 was the first version to support these builtins,
 // update the condition if the version is not accurate. (Andrey Semashev)
 #if defined(__GNUC__) && BOOST_INTEL_CXX_VERSION >= 800
 #define BOOST_LIKELY(x) __builtin_expect(x, 1)

@@ -15,8 +15,8 @@ namespace numpy
 
   namespace wrapper
   {
-    template <class I>
-    I asarray_chkfinite(I const &a)
+    template <class I_>
+    I_ asarray_chkfinite(I_ const &a)
     {
       if (!functor::isfinite()(a))
         throw types::ValueError("array must ! contain infs || NaNs");

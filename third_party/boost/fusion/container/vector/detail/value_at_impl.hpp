@@ -30,7 +30,7 @@ namespace boost { namespace fusion
 
     namespace vector_detail
     {
-        template <std::size_t I, typename T>
+        template <std::size_t I_, typename T>
         struct store;
 
         template <std::size_t N, typename U>

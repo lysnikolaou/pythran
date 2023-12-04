@@ -98,7 +98,7 @@
 
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40500) && !defined(__SUNPRO_CC)
   // this condition is a copy paste from is_constructible.hpp
-  // I also disable SUNPRO, as it seems not to support type_traits correctly
+  // I_ also disable SUNPRO, as it seems not to support type_traits correctly
 #else
 # define BOOST_OPTIONAL_DETAIL_NO_IS_CONSTRUCTIBLE_TRAIT
 #endif

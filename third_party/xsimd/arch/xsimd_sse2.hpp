@@ -46,8 +46,8 @@ namespace xsimd
         }
 
         // fwd
-        template <class A, class T, size_t I>
-        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I>, requires_arch<generic>) noexcept;
+        template <class A, class T, size_t I_>
+        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I_>, requires_arch<generic>) noexcept;
 
         // abs
         template <class A>
@@ -823,12 +823,12 @@ namespace xsimd
         }
 
         // insert
-        template <class A, class T, size_t I, class = typename std::enable_if<std::is_integral<T>::value, void>::type>
-        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I> pos, requires_arch<sse2>) noexcept
+        template <class A, class T, size_t I_, class = typename std::enable_if<std::is_integral<T>::value, void>::type>
+        inline batch<T, A> insert(batch<T, A> const& self, T val, index<I_> pos, requires_arch<sse2>) noexcept
         {
             XSIMD_IF_CONSTEXPR(sizeof(T) == 2)
             {
-                return _mm_insert_epi16(self, val, I);
+                return _mm_insert_epi16(self, val, I_);
             }
             else
             {

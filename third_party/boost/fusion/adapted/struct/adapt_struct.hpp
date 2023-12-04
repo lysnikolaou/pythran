@@ -34,12 +34,12 @@
 #include <boost/fusion/adapted/struct/detail/deref_impl.hpp>
 
 #define BOOST_FUSION_ADAPT_STRUCT_C(                                            \
-    TEMPLATE_PARAMS_SEQ, NAME_SEQ, IS_VIEW, I, ATTRIBUTE)                       \
+    TEMPLATE_PARAMS_SEQ, NAME_SEQ, IS_VIEW, I_, ATTRIBUTE)                       \
         BOOST_FUSION_ADAPT_STRUCT_C_BASE(                                       \
             TEMPLATE_PARAMS_SEQ,                                                \
             NAME_SEQ,                                                           \
             IS_VIEW,                                                            \
-            I,                                                                  \
+            I_,                                                                  \
             BOOST_PP_IIF(IS_VIEW, BOOST_FUSION_PROXY_PREFIX, BOOST_PP_EMPTY),   \
             BOOST_FUSION_ADAPT_STRUCT_WRAPPEDATTR(ATTRIBUTE),                   \
             BOOST_FUSION_ADAPT_STRUCT_WRAPPEDATTR_SIZE(ATTRIBUTE),              \

@@ -56,7 +56,7 @@ namespace boost { namespace fusion { namespace detail
 //   int i;
 //   long &&l = static_cast<long &&>(i);
 //
-// OK, now can we replace all usage of std::forward to static_cast? -- I say NO!
+// OK, now can we replace all usage of std::forward to static_cast? -- I_ say NO!
 // All of rvalue-reference ready Clang doesn't compile above static_cast usage [2], sigh...
 //
 // References:

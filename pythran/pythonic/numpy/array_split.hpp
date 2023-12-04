@@ -34,13 +34,13 @@ namespace numpy
     return out;
   }
 
-  template <class E, class I>
+  template <class E, class I_>
   typename std::enable_if<
-      types::is_iterable<I>::value,
+      types::is_iterable<I_>::value,
       types::list<typename assignable<
           decltype(std::declval<E>()[types::fast_contiguous_slice()])>::type>>::
       type
-      array_split(E const &a, I const &split_mask)
+      array_split(E const &a, I_ const &split_mask)
   {
     long sz = a.template shape<0>();
     types::list<typename assignable<

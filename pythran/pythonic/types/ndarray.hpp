@@ -1065,13 +1065,13 @@ PYTHONIC_NS_END
 namespace std
 {
 
-  template <size_t I, class E>
+  template <size_t I_, class E>
   auto get(E &&a) -> typename std::enable_if<
       pythonic::types::is_array<typename std::remove_cv<
           typename std::remove_reference<E>::type>::type>::value,
-      decltype(std::forward<E>(a)[I])>::type
+      decltype(std::forward<E>(a)[I_])>::type
   {
-    return std::forward<E>(a)[I];
+    return std::forward<E>(a)[I_];
   }
 } // namespace std
 

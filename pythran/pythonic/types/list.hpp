@@ -782,45 +782,45 @@ PYTHONIC_NS_END
 /* overload std::get */
 namespace std
 {
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::list<T>::reference get(pythonic::types::list<T> &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::list<T>::const_reference
   get(pythonic::types::list<T> const &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::list<T>::value_type
   get(pythonic::types::list<T> &&t)
   {
-    return std::move(t)[I];
+    return std::move(t)[I_];
   }
 
-  template <size_t I, class T, class S>
+  template <size_t I_, class T, class S>
   typename pythonic::types::sliced_list<T, S>::reference
   get(pythonic::types::sliced_list<T, S> &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T, class S>
+  template <size_t I_, class T, class S>
   typename pythonic::types::sliced_list<T, S>::const_reference
   get(pythonic::types::sliced_list<T, S> const &t)
   {
-    return t[I];
+    return t[I_];
   }
 
-  template <size_t I, class T, class S>
+  template <size_t I_, class T, class S>
   typename pythonic::types::sliced_list<T, S>::value_type
   get(pythonic::types::sliced_list<T, S> &&t)
   {
-    return std::move(t)[I];
+    return std::move(t)[I_];
   }
 } // namespace std
 

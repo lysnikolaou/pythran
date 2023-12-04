@@ -16,21 +16,21 @@ namespace numpy
 {
   namespace
   {
-    template <class I, class O>
-    void _unique1(I begin, I end, O &out, utils::int_<1>)
+    template <class I_, class O>
+    void _unique1(I_ begin, I_ end, O &out, utils::int_<1>)
     {
       out.insert(begin, end);
     }
 
-    template <class I, class O, size_t N>
-    void _unique1(I begin, I end, O &out, utils::int_<N>)
+    template <class I_, class O, size_t N>
+    void _unique1(I_ begin, I_ end, O &out, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _unique1((*begin).begin(), (*begin).end(), out, utils::int_<N - 1>());
     }
 
-    template <class I, class O0, class O1>
-    void _unique2(I begin, I end, O0 &out0, O1 &out1, long &i, utils::int_<1>)
+    template <class I_, class O0, class O1>
+    void _unique2(I_ begin, I_ end, O0 &out0, O1 &out1, long &i, utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i) {
         auto pair = out0.insert(*begin);
@@ -39,15 +39,15 @@ namespace numpy
       }
     }
 
-    template <class I, class O0, class O1, size_t N>
-    void _unique2(I begin, I end, O0 &out0, O1 &out1, long &i, utils::int_<N>)
+    template <class I_, class O0, class O1, size_t N>
+    void _unique2(I_ begin, I_ end, O0 &out0, O1 &out1, long &i, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _unique2((*begin).begin(), (*begin).end(), out0, out1, i,
                  utils::int_<N - 1>());
     }
-    template <class I, class O0, class O1, class O2>
-    void _unique3(I begin, I end, O0 &out0, O1 &out1, O2 &out2, long &i,
+    template <class I_, class O0, class O1, class O2>
+    void _unique3(I_ begin, I_ end, O0 &out0, O1 &out1, O2 &out2, long &i,
                   utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i) {
@@ -57,8 +57,8 @@ namespace numpy
           out1.push_back(i);
       }
     }
-    template <class I, class O0, class O1, class O2, size_t N>
-    void _unique3(I begin, I end, O0 &out0, O1 &out1, O2 &out2, long &i,
+    template <class I_, class O0, class O1, class O2, size_t N>
+    void _unique3(I_ begin, I_ end, O0 &out0, O1 &out1, O2 &out2, long &i,
                   utils::int_<N>)
     {
       for (; begin != end; ++begin)
@@ -66,8 +66,8 @@ namespace numpy
                  utils::int_<N - 1>());
     }
 
-    template <class I, class O1, class O2, class O3>
-    void _unique4(I begin, I end, O1 &out1, O2 &out2, O3 &out3, long &i,
+    template <class I_, class O1, class O2, class O3>
+    void _unique4(I_ begin, I_ end, O1 &out1, O2 &out2, O3 &out3, long &i,
                   utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i) {
@@ -79,32 +79,32 @@ namespace numpy
         }
       }
     }
-    template <class I, class O1, class O2, class O3, size_t N>
-    void _unique4(I begin, I end, O1 &out1, O2 &out2, O3 &out3, long &i,
+    template <class I_, class O1, class O2, class O3, size_t N>
+    void _unique4(I_ begin, I_ end, O1 &out1, O2 &out2, O3 &out3, long &i,
                   utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _unique4((*begin).begin(), (*begin).end(), out1, out2, out3, i,
                  utils::int_<N - 1>());
     }
-    template <class I, class O0, class O2>
-    void _unique5(I begin, I end, O0 &out0, O2 &out2, long &i, utils::int_<1>)
+    template <class I_, class O0, class O2>
+    void _unique5(I_ begin, I_ end, O0 &out0, O2 &out2, long &i, utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i) {
         auto pair = out0.insert(*begin);
         out2[i] = std::distance(out0.begin(), pair.first);
       }
     }
-    template <class I, class O0, class O2, size_t N>
-    void _unique5(I begin, I end, O0 &out0, O2 &out2, long &i, utils::int_<N>)
+    template <class I_, class O0, class O2, size_t N>
+    void _unique5(I_ begin, I_ end, O0 &out0, O2 &out2, long &i, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _unique5((*begin).begin(), (*begin).end(), out0, out2, i,
                  utils::int_<N - 1>());
     }
 
-    template <class I, class O1, class O3>
-    void _unique6(I begin, I end, O1 &out1, O3 &out3, long &i, utils::int_<1>)
+    template <class I_, class O1, class O3>
+    void _unique6(I_ begin, I_ end, O1 &out1, O3 &out3, long &i, utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i) {
         auto res = out3.insert(std::make_pair(*begin, 0));
@@ -114,16 +114,16 @@ namespace numpy
         }
       }
     }
-    template <class I, class O1, class O3, size_t N>
-    void _unique6(I begin, I end, O1 &out1, O3 &out3, long &i, utils::int_<N>)
+    template <class I_, class O1, class O3, size_t N>
+    void _unique6(I_ begin, I_ end, O1 &out1, O3 &out3, long &i, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _unique6((*begin).begin(), (*begin).end(), out1, out3, i,
                  utils::int_<N - 1>());
     }
 
-    template <class I, class O2, class O3>
-    void _unique7(I begin, I end, O2 &out2, O3 &out3, long &i, utils::int_<1>)
+    template <class I_, class O2, class O3>
+    void _unique7(I_ begin, I_ end, O2 &out2, O3 &out3, long &i, utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i) {
         auto res = out3.insert(std::make_pair(*begin, 0));
@@ -131,24 +131,24 @@ namespace numpy
         out2[i] = std::distance(out3.begin(), res.first);
       }
     }
-    template <class I, class O2, class O3, size_t N>
-    void _unique7(I begin, I end, O2 &out2, O3 &out3, long &i, utils::int_<N>)
+    template <class I_, class O2, class O3, size_t N>
+    void _unique7(I_ begin, I_ end, O2 &out2, O3 &out3, long &i, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _unique7((*begin).begin(), (*begin).end(), out2, out3, i,
                  utils::int_<N - 1>());
     }
 
-    template <class I, class O3>
-    void _unique8(I begin, I end, O3 &out3, long &i, utils::int_<1>)
+    template <class I_, class O3>
+    void _unique8(I_ begin, I_ end, O3 &out3, long &i, utils::int_<1>)
     {
       for (; begin != end; ++begin, ++i) {
         auto res = out3.insert(std::make_pair(*begin, 0));
         res.first->second += 1;
       }
     }
-    template <class I, class O3, size_t N>
-    void _unique8(I begin, I end, O3 &out3, long &i, utils::int_<N>)
+    template <class I_, class O3, size_t N>
+    void _unique8(I_ begin, I_ end, O3 &out3, long &i, utils::int_<N>)
     {
       for (; begin != end; ++begin)
         _unique8((*begin).begin(), (*begin).end(), out3, i,

@@ -89,11 +89,11 @@ namespace types
     T ref;
     using shape_t = types::array<long, value>;
 
-    template <size_t I>
+    template <size_t I_>
     long shape() const
     {
-      return I == 0 ? 1
-                    : (long)(ref.template shape < I == 0 ? 0 : (I - 1) > ());
+      return I_ == 0 ? 1
+                    : (long)(ref.template shape < I_ == 0 ? 0 : (I_ - 1) > ());
     }
 
     broadcasted() = default;
@@ -180,8 +180,8 @@ namespace types
     broadcast_base() = default;
     template <class V>
     broadcast_base(V v);
-    template <class I>
-    void load(I) const;
+    template <class I_>
+    void load(I_) const;
   };
 
 #ifdef USE_XSIMD
@@ -193,8 +193,8 @@ namespace types
 
     template <class V>
     broadcast_base(V v);
-    template <class I>
-    auto load(I) const -> decltype(this->_splated);
+    template <class I_>
+    auto load(I_) const -> decltype(this->_splated);
   };
 #endif
 
@@ -315,12 +315,12 @@ namespace types
       return _base._value;
     }
 
-    template <class I>
-    auto load(I i) const -> decltype(this->_base.load(i));
+    template <class I_>
+    auto load(I_ i) const -> decltype(this->_base.load(i));
     template <class... Args>
     dtype operator()(Args &&...) const;
     using shape_t = types::pshape<std::integral_constant<long, 1>>;
-    template <size_t I>
+    template <size_t I_>
     std::integral_constant<long, 1> shape() const;
     long flat_size() const;
     const_iterator begin() const

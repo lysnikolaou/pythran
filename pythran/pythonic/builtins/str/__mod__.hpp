@@ -23,11 +23,11 @@ namespace builtins
       {
         f % std::get<std::tuple_size<Tuple>::value - 1>(a);
       }
-      template <class Tuple, size_t I>
-      void fmt(boost::format &f, Tuple const &a, utils::int_<I>)
+      template <class Tuple, size_t I_>
+      void fmt(boost::format &f, Tuple const &a, utils::int_<I_>)
       {
-        fmt(f % std::get<std::tuple_size<Tuple>::value - I>(a), a,
-            utils::int_<I - 1>());
+        fmt(f % std::get<std::tuple_size<Tuple>::value - I_>(a), a,
+            utils::int_<I_ - 1>());
       }
     }
 

@@ -104,11 +104,11 @@ namespace types
     static const bool is_strided = std::is_same<slice, S>::value;
 
     using shape_t = types::array<long, value>;
-    template <size_t I>
+    template <size_t I_>
     auto shape() const
-        -> decltype(details::extract_shape(*this, utils::int_<I>{}))
+        -> decltype(details::extract_shape(*this, utils::int_<I_>{}))
     {
-      return details::extract_shape(*this, utils::int_<I>{});
+      return details::extract_shape(*this, utils::int_<I_>{});
     }
 
     // constructor
@@ -381,13 +381,13 @@ namespace types
 
     long count(T const &x) const;
     using shape_t = array<long, value>;
-    template <size_t I>
+    template <size_t I_>
     long shape() const
     {
-      if (I == 0)
+      if (I_ == 0)
         return size();
       else
-        return details::extract_shape(*this, utils::int_<I>{});
+        return details::extract_shape(*this, utils::int_<I_>{});
     }
 
     template <class Tp, size_t N, class V>
@@ -453,7 +453,7 @@ namespace types
     operator list<T>() const;
     static constexpr long size();
 
-    template <size_t I>
+    template <size_t I_>
     std::integral_constant<long, 0> shape() const
     {
       return {};
@@ -526,35 +526,35 @@ PYTHONIC_NS_END
 /* overload std::get */
 namespace std
 {
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::list<T>::reference get(pythonic::types::list<T> &t);
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::list<T>::const_reference
   get(pythonic::types::list<T> const &t);
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   typename pythonic::types::list<T>::value_type
   get(pythonic::types::list<T> &&t);
 
-  template <size_t I, class T, class S>
+  template <size_t I_, class T, class S>
   typename pythonic::types::sliced_list<T, S>::reference
   get(pythonic::types::sliced_list<T, S> &t);
 
-  template <size_t I, class T, class S>
+  template <size_t I_, class T, class S>
   typename pythonic::types::sliced_list<T, S>::const_reference
   get(pythonic::types::sliced_list<T, S> const &t);
 
-  template <size_t I, class T, class S>
+  template <size_t I_, class T, class S>
   typename pythonic::types::sliced_list<T, S>::value_type
   get(pythonic::types::sliced_list<T, S> &&t);
 
-  template <size_t I, class T>
-  struct tuple_element<I, pythonic::types::list<T>> {
+  template <size_t I_, class T>
+  struct tuple_element<I_, pythonic::types::list<T>> {
     typedef typename pythonic::types::list<T>::value_type type;
   };
-  template <size_t I, class T, class S>
-  struct tuple_element<I, pythonic::types::sliced_list<T, S>> {
+  template <size_t I_, class T, class S>
+  struct tuple_element<I_, pythonic::types::sliced_list<T, S>> {
     typedef typename pythonic::types::sliced_list<T, S>::value_type type;
   };
 }

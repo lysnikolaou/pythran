@@ -130,56 +130,56 @@ PYTHONIC_NS_END
 
 namespace std
 {
-  template <size_t I, class T0, class T1>
-  struct tuple_element<I, pythonic::types::StaticIfReturnHolder<T0, T1>> {
+  template <size_t I_, class T0, class T1>
+  struct tuple_element<I_, pythonic::types::StaticIfReturnHolder<T0, T1>> {
     using type = typename std::conditional<
-        I == 0, bool, typename std::conditional<I == 1, T0, T1>::type>::type;
+        I_ == 0, bool, typename std::conditional<I_ == 1, T0, T1>::type>::type;
   };
-  template <size_t I, class T0, class T1>
+  template <size_t I_, class T0, class T1>
   auto get(pythonic::types::StaticIfReturnHolder<T0, T1> &t)
-      -> decltype(std::get<I>(t.args))
+      -> decltype(std::get<I_>(t.args))
   {
-    return std::get<I>(t.args);
+    return std::get<I_>(t.args);
   }
 
-  template <size_t I, class T>
-  struct tuple_element<I, pythonic::types::StaticIfNoReturn<T>> {
+  template <size_t I_, class T>
+  struct tuple_element<I_, pythonic::types::StaticIfNoReturn<T>> {
     using type =
         decltype(std::declval<pythonic::types::StaticIfNoReturn<T>>().get(
-            std::integral_constant<size_t, I>{}));
+            std::integral_constant<size_t, I_>{}));
   };
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   auto get(pythonic::types::StaticIfNoReturn<T> &t)
-      -> decltype(t.get(std::integral_constant<size_t, I>{}))
+      -> decltype(t.get(std::integral_constant<size_t, I_>{}))
   {
-    return t.get(std::integral_constant<size_t, I>{});
+    return t.get(std::integral_constant<size_t, I_>{});
   }
 
-  template <size_t I, class T>
-  struct tuple_element<I, pythonic::types::StaticIfBreak<T>> {
+  template <size_t I_, class T>
+  struct tuple_element<I_, pythonic::types::StaticIfBreak<T>> {
     using type = decltype(std::declval<pythonic::types::StaticIfBreak<T>>().get(
-        std::integral_constant<size_t, I>{}));
+        std::integral_constant<size_t, I_>{}));
   };
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   auto get(pythonic::types::StaticIfBreak<T> &t)
-      -> decltype(t.get(std::integral_constant<size_t, I>{}))
+      -> decltype(t.get(std::integral_constant<size_t, I_>{}))
   {
-    return t.get(std::integral_constant<size_t, I>{});
+    return t.get(std::integral_constant<size_t, I_>{});
   }
 
-  template <size_t I, class T>
-  struct tuple_element<I, pythonic::types::StaticIfCont<T>> {
+  template <size_t I_, class T>
+  struct tuple_element<I_, pythonic::types::StaticIfCont<T>> {
     using type = decltype(std::declval<pythonic::types::StaticIfCont<T>>().get(
-        std::integral_constant<size_t, I>{}));
+        std::integral_constant<size_t, I_>{}));
   };
 
-  template <size_t I, class T>
+  template <size_t I_, class T>
   auto get(pythonic::types::StaticIfCont<T> &t)
-      -> decltype(t.get(std::integral_constant<size_t, I>{}))
+      -> decltype(t.get(std::integral_constant<size_t, I_>{}))
   {
-    return t.get(std::integral_constant<size_t, I>{});
+    return t.get(std::integral_constant<size_t, I_>{});
   }
 }
 

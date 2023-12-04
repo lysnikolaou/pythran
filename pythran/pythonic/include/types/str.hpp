@@ -371,16 +371,16 @@ namespace std
   };
 
   /* std::get overload */
-  template <size_t I>
+  template <size_t I_>
   pythonic::types::str get(pythonic::types::str const &t);
 
-  template <size_t I>
-  struct tuple_element<I, pythonic::types::str> {
+  template <size_t I_>
+  struct tuple_element<I_, pythonic::types::str> {
     using type = pythonic::types::str;
   };
 
-  template <size_t I, class S>
-  struct tuple_element<I, pythonic::types::sliced_str<S>> {
+  template <size_t I_, class S>
+  struct tuple_element<I_, pythonic::types::sliced_str<S>> {
     using type = pythonic::types::str;
   };
 } // namespace std

@@ -39,12 +39,12 @@ namespace operator_
   }
 
   template <typename... Types>
-  template <class T, class A, size_t I>
+  template <class T, class A, size_t I_>
   void itemgetter_tuple_return<Types...>::helper(T &t, A const &a,
-                                                 utils::int_<I>) const
+                                                 utils::int_<I_>) const
   {
-    std::get<I>(t) = a[std::get<I>(items)];
-    helper(t, a, utils::int_<I - 1>());
+    std::get<I_>(t) = a[std::get<I_>(items)];
+    helper(t, a, utils::int_<I_ - 1>());
   }
 
   template <typename... Types>

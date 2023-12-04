@@ -692,10 +692,10 @@ namespace xsimd
          * insert *
          **********/
 
-        template <class A, size_t I>
-        inline batch<double, A> insert(batch<double, A> const& self, double val, index<I>, requires_arch<neon64>) noexcept
+        template <class A, size_t I_>
+        inline batch<double, A> insert(batch<double, A> const& self, double val, index<I_>, requires_arch<neon64>) noexcept
         {
-            return vsetq_lane_f64(val, self, I);
+            return vsetq_lane_f64(val, self, I_);
         }
 
         /******************
@@ -999,13 +999,13 @@ namespace xsimd
 
         namespace detail
         {
-            template <class A, size_t I, size_t... Is>
+            template <class A, size_t I_, size_t... Is>
             inline batch<double, A> extract_pair(batch<double, A> const& lhs, batch<double, A> const& rhs, std::size_t n,
-                                                 ::xsimd::detail::index_sequence<I, Is...>) noexcept
+                                                 ::xsimd::detail::index_sequence<I_, Is...>) noexcept
             {
-                if (n == I)
+                if (n == I_)
                 {
-                    return vextq_f64(rhs, lhs, I);
+                    return vextq_f64(rhs, lhs, I_);
                 }
                 else
                 {

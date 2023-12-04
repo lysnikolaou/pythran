@@ -46,51 +46,51 @@ namespace numpy
         }
       }
       // array version
-      template <class Out, class A, size_t... I>
+      template <class Out, class A, size_t... I_>
       void operator()(Out &&out, A const &from, long axis,
-                      utils::index_sequence<I...>) const
+                      utils::index_sequence<I_...>) const
       {
         if (axis == 0) {
           auto out_iter = out.begin();
           (void)std::initializer_list<int>{
-              (out_iter = std::copy(std::get<I>(from).begin(),
-                                    std::get<I>(from).end(), out_iter),
+              (out_iter = std::copy(std::get<I_>(from).begin(),
+                                    std::get<I_>(from).end(), out_iter),
                1)...};
         } else {
-          types::array<typename A::value_type::const_iterator, sizeof...(I)>
-              ifroms = {std::get<I>(from).begin()...};
+          types::array<typename A::value_type::const_iterator, sizeof...(I_)>
+              ifroms = {std::get<I_>(from).begin()...};
 
           for (auto &&iout : out) {
             types::array<
                 typename std::iterator_traits<
                     typename A::value_type::const_iterator>::value_type,
-                sizeof...(I)>
-                difroms = {*std::get<I>(ifroms)...};
+                sizeof...(I_)>
+                difroms = {*std::get<I_>(ifroms)...};
             concatenate_helper<N - 1>()(iout, difroms, axis - 1,
-                                        utils::index_sequence<I...>{});
-            (void)std::initializer_list<int>{(++std::get<I>(ifroms), 0)...};
+                                        utils::index_sequence<I_...>{});
+            (void)std::initializer_list<int>{(++std::get<I_>(ifroms), 0)...};
           }
         }
       }
       // tuple version
-      template <class Out, class... Ts, size_t... I>
+      template <class Out, class... Ts, size_t... I_>
       void operator()(Out &&out, std::tuple<Ts...> const &from, long axis,
-                      utils::index_sequence<I...>) const
+                      utils::index_sequence<I_...>) const
       {
         if (axis == 0) {
           auto out_iter = out.begin();
           (void)std::initializer_list<int>{
-              (out_iter = std::copy(std::get<I>(from).begin(),
-                                    std::get<I>(from).end(), out_iter),
+              (out_iter = std::copy(std::get<I_>(from).begin(),
+                                    std::get<I_>(from).end(), out_iter),
                1)...};
         } else {
-          auto ifroms = std::make_tuple(std::get<I>(from).begin()...);
+          auto ifroms = std::make_tuple(std::get<I_>(from).begin()...);
 
           for (auto &&iout : out) {
-            auto difroms = std::make_tuple(*std::get<I>(ifroms)...);
+            auto difroms = std::make_tuple(*std::get<I_>(ifroms)...);
             concatenate_helper<N - 1>()(iout, difroms, axis - 1,
-                                        utils::index_sequence<I...>{});
-            (void)std::initializer_list<int>{(++std::get<I>(ifroms), 0)...};
+                                        utils::index_sequence<I_...>{});
+            (void)std::initializer_list<int>{(++std::get<I_>(ifroms), 0)...};
           }
         }
       }
@@ -104,24 +104,24 @@ namespace numpy
       {
       }
       // array version
-      template <class Out, class E, size_t... I>
+      template <class Out, class E, size_t... I_>
       void operator()(Out &&, E const &, long,
-                      utils::index_sequence<I...>) const
+                      utils::index_sequence<I_...>) const
       {
       }
       // tuple version - sentinel
-      template <class Out, class... Ts, size_t... I>
+      template <class Out, class... Ts, size_t... I_>
       void operator()(Out &&, std::tuple<Ts...> const &, long,
-                      utils::index_sequence<I...>) const
+                      utils::index_sequence<I_...>) const
       {
       }
     };
 
-    template <class A, size_t... I>
+    template <class A, size_t... I_>
     long concatenate_axis_size(A const &from, long axis,
-                               utils::index_sequence<I...>)
+                               utils::index_sequence<I_...>)
     {
-      long sizes[] = {sutils::getshape(std::get<I>(from))[axis]...};
+      long sizes[] = {sutils::getshape(std::get<I_>(from))[axis]...};
       return std::accumulate(std::begin(sizes), std::end(sizes), 0L,
                              std::plus<long>());
     }

@@ -261,13 +261,13 @@ PYTHONIC_NS_END
 namespace std
 {
   /* std::get overload */
-  template <size_t I, class T0>
+  template <size_t I_, class T0>
   auto get(pythonic::types::none<T0> const &t)
-      -> decltype(std::get<I>((T0 const &)t));
+      -> decltype(std::get<I_>((T0 const &)t));
 
-  template <size_t I, class T0>
-  struct tuple_element<I, pythonic::types::none<T0>> {
-    using type = typename std::tuple_element<I, T0>::type;
+  template <size_t I_, class T0>
+  struct tuple_element<I_, pythonic::types::none<T0>> {
+    using type = typename std::tuple_element<I_, T0>::type;
   };
 } // namespace std
 

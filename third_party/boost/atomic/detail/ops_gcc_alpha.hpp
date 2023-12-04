@@ -57,8 +57,8 @@ namespace detail {
     instead copy the trick from the Linux kernel, introduce a forward
     branch and back again.
 
-    I have, however, had a hard time measuring the difference between
-    the two versions in microbenchmarks -- I am leaving it in nevertheless
+    I_ have, however, had a hard time measuring the difference between
+    the two versions in microbenchmarks -- I_ am leaving it in nevertheless
     as it apparently does not hurt either.
 */
 

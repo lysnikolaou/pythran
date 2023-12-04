@@ -21,7 +21,7 @@ namespace boost{
    namespace mpl
    {
       template <bool B> struct bool_;
-      template <class I, I val> struct integral_c;
+      template <class I_, I_ val> struct integral_c;
       struct integral_c_tag;
    }
 }
@@ -31,7 +31,7 @@ namespace boost{
 namespace mpl_{
 
    template <bool B> struct bool_;
-   template <class I, I val> struct integral_c;
+   template <class I_, I_ val> struct integral_c;
    struct integral_c_tag;
 }
 

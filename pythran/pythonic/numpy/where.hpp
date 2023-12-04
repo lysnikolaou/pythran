@@ -58,11 +58,11 @@ namespace types
         return *std::get<2>(iters);
     }
 
-    template <class Ts, size_t... I>
-    auto operator()(Ts const &iters, utils::index_sequence<I...>, ...)
-        -> decltype(numpy::functor::where{}(*std::get<I>(iters)...))
+    template <class Ts, size_t... I_>
+    auto operator()(Ts const &iters, utils::index_sequence<I_...>, ...)
+        -> decltype(numpy::functor::where{}(*std::get<I_>(iters)...))
     {
-      return numpy::functor::where{}(*std::get<I>(iters)...);
+      return numpy::functor::where{}(*std::get<I_>(iters)...);
     }
   };
 }

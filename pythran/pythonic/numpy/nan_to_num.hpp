@@ -18,14 +18,14 @@ namespace numpy
 
   namespace wrapper
   {
-    template <class I>
-    I nan_to_num(I const &a)
+    template <class I_>
+    I_ nan_to_num(I_ const &a)
     {
       if (functor::isinf{}(a)) {
         if (a >= 0)
-          return std::numeric_limits<I>::max();
+          return std::numeric_limits<I_>::max();
         else
-          return std::numeric_limits<I>::lowest();
+          return std::numeric_limits<I_>::lowest();
       } else if (functor::isnan{}(a))
         return 0;
       else

@@ -46,7 +46,7 @@ struct input_output_iterator_tag
     // ambiguities when a stdlib implementation dispatches on a
     // function which is overloaded on both input_iterator_tag and
     // output_iterator_tag, as STLPort does, in its __valid_range
-    // function.  I claim it's better to avoid the ambiguity in these
+    // function.  I_ claim it's better to avoid the ambiguity in these
     // cases.
     operator std::output_iterator_tag() const
     {

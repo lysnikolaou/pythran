@@ -42,12 +42,12 @@ namespace builtins
       Operator _op;
 
       map_iterator() = default;
-      template <size_t... I>
+      template <size_t... I_>
       map_iterator(Operator const &_op, std::tuple<Iters...> &_iters,
-                   utils::index_sequence<I...>);
-      template <size_t... I>
+                   utils::index_sequence<I_...>);
+      template <size_t... I_>
       map_iterator(itertools::npos, Operator const &_op,
-                   std::tuple<Iters...> &_iters, utils::index_sequence<I...>);
+                   std::tuple<Iters...> &_iters, utils::index_sequence<I_...>);
 
       typename map_res<Operator, Iters...>::type operator*() const;
       map_iterator &operator++();
@@ -69,19 +69,19 @@ namespace builtins
       bool equal(map_iterator const &other, utils::int_<N>) const;
       bool equal(map_iterator const &other, utils::int_<0>) const;
 
-      template <size_t I>
-      void advance(long i, utils::int_<I>);
+      template <size_t I_>
+      void advance(long i, utils::int_<I_>);
       void advance(long i, utils::int_<0>);
 
-      template <size_t... I>
-      void next(utils::index_sequence<I...>);
+      template <size_t... I_>
+      void next(utils::index_sequence<I_...>);
 
-      template <size_t... I>
+      template <size_t... I_>
       typename map_res<Operator, Iters...>::type
-          get_value(utils::index_sequence<I...>, std::true_type) const;
-      template <size_t... I>
+          get_value(utils::index_sequence<I_...>, std::true_type) const;
+      template <size_t... I_>
       typename map_res<Operator, Iters...>::type
-          get_value(utils::index_sequence<I...>, std::false_type) const;
+          get_value(utils::index_sequence<I_...>, std::false_type) const;
     };
 
     template <typename Operator, typename... Iters>

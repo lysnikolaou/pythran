@@ -18,32 +18,32 @@ namespace itertools
     /// product iterator implementation
 
     template <typename... Iters>
-    template <size_t... I>
+    template <size_t... I_>
     product_iterator<Iters...>::product_iterator(
-        std::tuple<Iters...> &_iters, utils::index_sequence<I...> const &)
-        : it_begin(std::get<I>(_iters).begin()...),
-          it_end(std::get<I>(_iters).end()...),
-          it(std::get<I>(_iters).begin()...), end(it_begin == it_end)
+        std::tuple<Iters...> &_iters, utils::index_sequence<I_...> const &)
+        : it_begin(std::get<I_>(_iters).begin()...),
+          it_end(std::get<I_>(_iters).end()...),
+          it(std::get<I_>(_iters).begin()...), end(it_begin == it_end)
     {
     }
 
     template <typename... Iters>
-    template <size_t... I>
+    template <size_t... I_>
     product_iterator<Iters...>::product_iterator(
-        npos, std::tuple<Iters...> &_iters, utils::index_sequence<I...> const &)
-        : it_begin(std::get<I>(_iters).end()...),
-          it_end(std::get<I>(_iters).end()...),
-          it(std::get<I>(_iters).end()...), end(true)
+        npos, std::tuple<Iters...> &_iters, utils::index_sequence<I_...> const &)
+        : it_begin(std::get<I_>(_iters).end()...),
+          it_end(std::get<I_>(_iters).end()...),
+          it(std::get<I_>(_iters).end()...), end(true)
     {
     }
 
     template <typename... Iters>
-    template <size_t... I>
+    template <size_t... I_>
     types::make_tuple_t<typename Iters::value_type...>
     product_iterator<Iters...>::get_value(
-        utils::index_sequence<I...> const &) const
+        utils::index_sequence<I_...> const &) const
     {
-      return types::make_tuple(*std::get<I>(it)...);
+      return types::make_tuple(*std::get<I_>(it)...);
     }
 
     template <typename... Iters>

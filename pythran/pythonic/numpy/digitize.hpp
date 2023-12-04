@@ -14,8 +14,8 @@ namespace numpy
 {
   namespace
   {
-    template <class I, class O, class B, class Op>
-    void _digitize(I begin, I end, O &out, B &bins, Op const &op,
+    template <class I_, class O, class B, class Op>
+    void _digitize(I_ begin, I_ end, O &out, B &bins, Op const &op,
                    utils::int_<1>)
     {
       for (; begin != end; ++begin, ++out)
@@ -23,8 +23,8 @@ namespace numpy
                bins.begin();
     }
 
-    template <class I, class O, class B, class Op, size_t N>
-    void _digitize(I begin, I end, O &out, B &bins, Op const &op,
+    template <class I_, class O, class B, class Op, size_t N>
+    void _digitize(I_ begin, I_ end, O &out, B &bins, Op const &op,
                    utils::int_<N>)
     {
       for (; begin != end; ++begin)

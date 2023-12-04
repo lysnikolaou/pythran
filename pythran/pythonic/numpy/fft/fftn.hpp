@@ -89,24 +89,24 @@ namespace numpy
     }
 
     // with shape
-    template <class T, class pS, class I, size_t N, class V, class Axes,
+    template <class T, class pS, class I_, size_t N, class V, class Axes,
               class Norm>
     types::ndarray<typename std::enable_if<std::is_integral<T>::value,
                                            std::complex<double>>::type,
                    types::array<long, std::tuple_size<pS>::value>>
-    fftn(types::ndarray<T, pS> const &a, types::array_base<I, N, V> const &s,
+    fftn(types::ndarray<T, pS> const &a, types::array_base<I_, N, V> const &s,
          Axes const &axes, Norm const &norm)
     {
       auto tmp_array = _copy_to_double(a);
       return fftn(tmp_array, s, axes, norm);
     }
 
-    template <class T, class pS, class I, size_t N, class V, class Axes,
+    template <class T, class pS, class I_, size_t N, class V, class Axes,
               class Norm>
     types::ndarray<typename std::enable_if<std::is_floating_point<T>::value,
                                            std::complex<T>>::type,
                    types::array<long, std::tuple_size<pS>::value>>
-    fftn(types::ndarray<T, pS> const &a, types::array_base<I, N, V> const &s,
+    fftn(types::ndarray<T, pS> const &a, types::array_base<I_, N, V> const &s,
          Axes const &axes, Norm const &norm)
     {
       auto nnorm = details::normalize_norm(norm);
@@ -119,12 +119,12 @@ namespace numpy
       return out;
     }
 
-    template <class T, class pS, class I, size_t N, class V, class Axes,
+    template <class T, class pS, class I_, size_t N, class V, class Axes,
               class Norm>
     types::ndarray<
         typename std::enable_if<types::is_complex<T>::value, T>::type,
         types::array<long, std::tuple_size<pS>::value>>
-    fftn(types::ndarray<T, pS> const &a, types::array_base<I, N, V> const &s,
+    fftn(types::ndarray<T, pS> const &a, types::array_base<I_, N, V> const &s,
          Axes const &axes, Norm const &norm)
     {
       auto nnorm = details::normalize_norm(norm);

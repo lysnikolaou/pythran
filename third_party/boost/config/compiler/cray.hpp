@@ -431,7 +431,7 @@
 //// Remove temporary macros
 ////
 
-// I've commented out some '#undef' statements to signify that we purposely
+// I_'ve commented out some '#undef' statements to signify that we purposely
 // want to keep certain macros.
 
 //#undef __GXX_EXPERIMENTAL_CXX0X__

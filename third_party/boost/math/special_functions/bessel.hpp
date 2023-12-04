@@ -171,7 +171,7 @@ template <class T, class Policy>
 T cyl_bessel_i_imp(T v, T x, const Policy& pol)
 {
    //
-   // This handles all the bessel I functions, note that we don't optimise
+   // This handles all the bessel I_ functions, note that we don't optimise
    // for integer v, other than the v = 0 or 1 special cases, as Millers
    // algorithm is at least as inefficient as the general case (the general
    // case has better error handling too).
@@ -219,9 +219,9 @@ T cyl_bessel_i_imp(T v, T x, const Policy& pol)
    }
    if((v > 0) && (x / v < 0.25))
       return bessel_i_small_z_series(v, x, pol);
-   T I, K;
-   bessel_ik(v, x, &I, &K, need_i, pol);
-   return I;
+   T I_, K;
+   bessel_ik(v, x, &I_, &K, need_i, pol);
+   return I_;
 }
 
 template <class T, class Policy>
@@ -242,8 +242,8 @@ inline T cyl_bessel_k_imp(T v, T x, const bessel_no_int_tag& /* t */, const Poli
          function,
          "Got x = %1%, but we need x > 0", x, pol);
    }
-   T I, K;
-   bessel_ik(v, x, &I, &K, need_k, pol);
+   T I_, K;
+   bessel_ik(v, x, &I_, &K, need_k, pol);
    return K;
 }
 

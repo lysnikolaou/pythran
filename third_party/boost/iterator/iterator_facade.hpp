@@ -45,7 +45,7 @@ namespace iterators {
 
   // This forward declaration is required for the friend declaration
   // in iterator_core_access
-  template <class I, class V, class TC, class R, class D> class iterator_facade;
+  template <class I_, class V, class TC, class R, class D> class iterator_facade;
 
   namespace detail
   {
@@ -502,8 +502,8 @@ namespace iterators {
    public:
 # else
 
-      template <class I, class V, class TC, class R, class D> friend class iterator_facade;
-      template <class I, class V, class TC, class R, class D, bool IsBidirectionalTraversal, bool IsRandomAccessTraversal>
+      template <class I_, class V, class TC, class R, class D> friend class iterator_facade;
+      template <class I_, class V, class TC, class R, class D, bool IsBidirectionalTraversal, bool IsRandomAccessTraversal>
       friend class detail::iterator_facade_base;
 
 #  define BOOST_ITERATOR_FACADE_RELATION(op)                                \
@@ -597,16 +597,16 @@ namespace iterators {
       //
       // Curiously Recurring Template interface.
       //
-      template <class I, class V, class TC, class R, class D>
-      static I& derived(iterator_facade<I,V,TC,R,D>& facade)
+      template <class I_, class V, class TC, class R, class D>
+      static I_& derived(iterator_facade<I_,V,TC,R,D>& facade)
       {
-          return *static_cast<I*>(&facade);
+          return *static_cast<I_*>(&facade);
       }
 
-      template <class I, class V, class TC, class R, class D>
-      static I const& derived(iterator_facade<I,V,TC,R,D> const& facade)
+      template <class I_, class V, class TC, class R, class D>
+      static I_ const& derived(iterator_facade<I_,V,TC,R,D> const& facade)
       {
-          return *static_cast<I const*>(&facade);
+          return *static_cast<I_ const*>(&facade);
       }
 
       // objects of this class are useless
@@ -786,15 +786,15 @@ namespace iterators {
       typedef iterator_facade<Derived,Value,CategoryOrTraversal,Reference,Difference> iterator_facade_;
   };
 
-  template <class I, class V, class TC, class R, class D>
-  inline typename boost::iterators::detail::postfix_increment_result<I,V,R,TC>::type
+  template <class I_, class V, class TC, class R, class D>
+  inline typename boost::iterators::detail::postfix_increment_result<I_,V,R,TC>::type
   operator++(
-      iterator_facade<I,V,TC,R,D>& i
+      iterator_facade<I_,V,TC,R,D>& i
     , int
   )
   {
-      typename boost::iterators::detail::postfix_increment_result<I,V,R,TC>::type
-          tmp(*static_cast<I*>(&i));
+      typename boost::iterators::detail::postfix_increment_result<I_,V,R,TC>::type
+          tmp(*static_cast<I_*>(&i));
 
       ++i;
 
@@ -805,7 +805,7 @@ namespace iterators {
   //
   // Comparison operator implementation. The library supplied operators
   // enables the user to provide fully interoperable constant/mutable
-  // iterator types. I.e. the library provides all operators
+  // iterator types. I_.e. the library provides all operators
   // for all mutable/constant iterator combinations.
   //
   // Note though that this kind of interoperability for constant/mutable
@@ -820,7 +820,7 @@ namespace iterators {
   //    enable the user to turn off mixed type operators
   //
   // The library takes care to provide only the right operator overloads.
-  // I.e.
+  // I_.e.
   //
   // bool operator==(Iterator,      Iterator);
   // bool operator==(ConstIterator, Iterator);

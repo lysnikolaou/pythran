@@ -183,19 +183,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1>
@@ -364,19 +364,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2>
@@ -545,19 +545,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2 , typename T3>
@@ -726,19 +726,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T3>::type at_impl(mpl::int_<3>) { return this->m3; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T3>::type>::type at_impl(mpl::int_<3>) const { return this->m3; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2 , typename T3 , typename T4>
@@ -907,19 +907,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T3>::type at_impl(mpl::int_<3>) { return this->m3; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T3>::type>::type at_impl(mpl::int_<3>) const { return this->m3; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T4>::type at_impl(mpl::int_<4>) { return this->m4; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T4>::type>::type at_impl(mpl::int_<4>) const { return this->m4; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2 , typename T3 , typename T4 , typename T5>
@@ -1088,19 +1088,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T3>::type at_impl(mpl::int_<3>) { return this->m3; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T3>::type>::type at_impl(mpl::int_<3>) const { return this->m3; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T4>::type at_impl(mpl::int_<4>) { return this->m4; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T4>::type>::type at_impl(mpl::int_<4>) const { return this->m4; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T5>::type at_impl(mpl::int_<5>) { return this->m5; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T5>::type>::type at_impl(mpl::int_<5>) const { return this->m5; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6>
@@ -1269,19 +1269,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T3>::type at_impl(mpl::int_<3>) { return this->m3; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T3>::type>::type at_impl(mpl::int_<3>) const { return this->m3; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T4>::type at_impl(mpl::int_<4>) { return this->m4; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T4>::type>::type at_impl(mpl::int_<4>) const { return this->m4; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T5>::type at_impl(mpl::int_<5>) { return this->m5; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T5>::type>::type at_impl(mpl::int_<5>) const { return this->m5; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T6>::type at_impl(mpl::int_<6>) { return this->m6; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T6>::type>::type at_impl(mpl::int_<6>) const { return this->m6; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 , typename T7>
@@ -1450,19 +1450,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T3>::type at_impl(mpl::int_<3>) { return this->m3; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T3>::type>::type at_impl(mpl::int_<3>) const { return this->m3; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T4>::type at_impl(mpl::int_<4>) { return this->m4; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T4>::type>::type at_impl(mpl::int_<4>) const { return this->m4; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T5>::type at_impl(mpl::int_<5>) { return this->m5; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T5>::type>::type at_impl(mpl::int_<5>) const { return this->m5; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T6>::type at_impl(mpl::int_<6>) { return this->m6; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T6>::type>::type at_impl(mpl::int_<6>) const { return this->m6; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T7>::type at_impl(mpl::int_<7>) { return this->m7; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T7>::type>::type at_impl(mpl::int_<7>) const { return this->m7; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 , typename T7 , typename T8>
@@ -1631,19 +1631,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T3>::type at_impl(mpl::int_<3>) { return this->m3; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T3>::type>::type at_impl(mpl::int_<3>) const { return this->m3; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T4>::type at_impl(mpl::int_<4>) { return this->m4; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T4>::type>::type at_impl(mpl::int_<4>) const { return this->m4; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T5>::type at_impl(mpl::int_<5>) { return this->m5; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T5>::type>::type at_impl(mpl::int_<5>) const { return this->m5; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T6>::type at_impl(mpl::int_<6>) { return this->m6; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T6>::type>::type at_impl(mpl::int_<6>) const { return this->m6; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T7>::type at_impl(mpl::int_<7>) { return this->m7; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T7>::type>::type at_impl(mpl::int_<7>) const { return this->m7; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T8>::type at_impl(mpl::int_<8>) { return this->m8; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T8>::type>::type at_impl(mpl::int_<8>) const { return this->m8; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
     template <typename T0 , typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 , typename T7 , typename T8 , typename T9>
@@ -1812,19 +1812,19 @@ namespace boost { namespace fusion
             return *this;
         }
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T0>::type at_impl(mpl::int_<0>) { return this->m0; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T0>::type>::type at_impl(mpl::int_<0>) const { return this->m0; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T1>::type at_impl(mpl::int_<1>) { return this->m1; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T1>::type>::type at_impl(mpl::int_<1>) const { return this->m1; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T2>::type at_impl(mpl::int_<2>) { return this->m2; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T2>::type>::type at_impl(mpl::int_<2>) const { return this->m2; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T3>::type at_impl(mpl::int_<3>) { return this->m3; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T3>::type>::type at_impl(mpl::int_<3>) const { return this->m3; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T4>::type at_impl(mpl::int_<4>) { return this->m4; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T4>::type>::type at_impl(mpl::int_<4>) const { return this->m4; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T5>::type at_impl(mpl::int_<5>) { return this->m5; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T5>::type>::type at_impl(mpl::int_<5>) const { return this->m5; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T6>::type at_impl(mpl::int_<6>) { return this->m6; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T6>::type>::type at_impl(mpl::int_<6>) const { return this->m6; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T7>::type at_impl(mpl::int_<7>) { return this->m7; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T7>::type>::type at_impl(mpl::int_<7>) const { return this->m7; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T8>::type at_impl(mpl::int_<8>) { return this->m8; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T8>::type>::type at_impl(mpl::int_<8>) const { return this->m8; } BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<T9>::type at_impl(mpl::int_<9>) { return this->m9; } BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED typename add_reference<typename add_const<T9>::type>::type at_impl(mpl::int_<9>) const { return this->m9; }
-        template<typename I>
+        template<typename I_>
         BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename mpl::at<types, I>::type>::type
-        at_impl(I)
+        typename add_reference<typename mpl::at<types, I_>::type>::type
+        at_impl(I_)
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
-        template<typename I>
+        template<typename I_>
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        typename add_reference<typename add_const<typename mpl::at<types, I>::type>::type>::type
-        at_impl(I) const
+        typename add_reference<typename add_const<typename mpl::at<types, I_>::type>::type>::type
+        at_impl(I_) const
         {
-            return this->at_impl(mpl::int_<I::value>());
+            return this->at_impl(mpl::int_<I_::value>());
         }
     };
 }}

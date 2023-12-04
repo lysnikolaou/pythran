@@ -202,7 +202,7 @@ namespace types
   namespace details
   {
 
-    template <size_t I, class S>
+    template <size_t I_, class S>
     std::tuple<> merge_gexpr<std::tuple<>, std::tuple<>>::run(
         S const &, std::tuple<> const &t0, std::tuple<> const &)
     {
@@ -210,7 +210,7 @@ namespace types
     }
 
     template <class... T0>
-    template <size_t I, class S>
+    template <size_t I_, class S>
     std::tuple<T0...> merge_gexpr<std::tuple<T0...>, std::tuple<>>::run(
         S const &, std::tuple<T0...> const &t0, std::tuple<>)
     {
@@ -223,28 +223,28 @@ namespace types
       return count_new_axis<typename std::tuple_element<Is, T>::type...>::value;
     }
 
-    template <size_t I, class S, class T, size_t... Is>
+    template <size_t I_, class S, class T, size_t... Is>
     auto normalize_all(S const &s, T const &t, utils::index_sequence<Is...>)
         -> decltype(std::make_tuple(normalize(
             std::get<Is>(t),
-            s.template shape<I + Is -
+            s.template shape<I_ + Is -
                              count_new_axis_helper<T>(
                                  utils::make_index_sequence<1 + Is>())>())...))
     {
       return std::make_tuple(normalize(
           std::get<Is>(t),
-          s.template shape<I + Is -
+          s.template shape<I_ + Is -
                            count_new_axis_helper<T>(
                                utils::make_index_sequence<1 + Is>())>())...);
     }
 
     template <class... T1>
-    template <size_t I, class S>
+    template <size_t I_, class S>
     std::tuple<normalize_t<T1>...>
     merge_gexpr<std::tuple<>, std::tuple<T1...>>::run(
         S const &s, std::tuple<>, std::tuple<T1...> const &t1)
     {
-      return normalize_all<I>(s, t1,
+      return normalize_all<I_>(s, t1,
                               utils::make_index_sequence<sizeof...(T1)>());
     }
 
@@ -342,17 +342,17 @@ namespace types
   }
 
   template <class Arg, class... S>
-  template <size_t I, size_t J, class Slice>
+  template <size_t I_, size_t J, class Slice>
   typename std::enable_if<is_normalized_slice<Slice>::value, void>::type
-  numpy_gexpr<Arg, S...>::init_shape(Slice const &s, utils::int_<I>,
+  numpy_gexpr<Arg, S...>::init_shape(Slice const &s, utils::int_<I_>,
                                      utils::int_<J>)
   {
     sutils::assign(std::get<J>(_shape),
-                   std::get<sizeof...(S) - I>(slices).size());
-    buffer += s.lower * arg.template strides<sizeof...(S) - I>();
+                   std::get<sizeof...(S) - I_>(slices).size());
+    buffer += s.lower * arg.template strides<sizeof...(S) - I_>();
     sutils::assign(std::get<J>(_strides),
-                   s.step * arg.template strides<sizeof...(S) - I>());
-    init_shape(std::get<sizeof...(S) - I + 1>(slices), utils::int_<I - 1>(),
+                   s.step * arg.template strides<sizeof...(S) - I_>());
+    init_shape(std::get<sizeof...(S) - I_ + 1>(slices), utils::int_<I_ - 1>(),
                utils::int_<J + 1>());
   }
 
@@ -366,13 +366,13 @@ namespace types
   }
 
   template <class Arg, class... S>
-  template <size_t I, size_t J>
-  void numpy_gexpr<Arg, S...>::init_shape(long cs, utils::int_<I>,
+  template <size_t I_, size_t J>
+  void numpy_gexpr<Arg, S...>::init_shape(long cs, utils::int_<I_>,
                                           utils::int_<J>)
   {
     assert(cs >= 0 && "normalized");
-    buffer += cs * arg.template strides<sizeof...(S) - I>();
-    init_shape(std::get<sizeof...(S) - I + 1>(slices), utils::int_<I - 1>(),
+    buffer += cs * arg.template strides<sizeof...(S) - I_>();
+    init_shape(std::get<sizeof...(S) - I_ + 1>(slices), utils::int_<I_ - 1>(),
                utils::int_<J>());
   }
 
